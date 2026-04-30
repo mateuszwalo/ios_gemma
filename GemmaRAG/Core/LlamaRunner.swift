@@ -6,13 +6,14 @@ private func llama_batch_clear(_ batch: inout llama_batch) {
 }
 
 private func llama_batch_add(_ batch: inout llama_batch, _ id: llama_token, _ pos: llama_pos, _ seq_ids: [llama_seq_id], _ logits: Bool) {
-    batch.token[Int(batch.n_tokens)] = id
-    batch.pos[Int(batch.n_tokens)] = pos
-    batch.n_seq_id[Int(batch.n_tokens)] = Int32(seq_ids.count)
+    let idx = Int(batch.n_tokens)
+    batch.token![idx] = id
+    batch.pos![idx] = pos
+    batch.n_seq_id![idx] = Int32(seq_ids.count)
     for i in 0..<seq_ids.count {
-        batch.seq_id[Int(batch.n_tokens)]![i] = seq_ids[i]
+        batch.seq_id![idx]![i] = seq_ids[i]
     }
-    batch.logits[Int(batch.n_tokens)] = logits ? 1 : 0
+    batch.logits![idx] = logits ? 1 : 0
     batch.n_tokens += 1
 }
 

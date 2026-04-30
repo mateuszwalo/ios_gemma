@@ -65,16 +65,20 @@ class VectorStore {
         // Compute dot products (= cosine similarity since both are normalized)
         var scores = [Float](repeating: 0, count: count)
 
-        query.withUnsafeBufferPointer { qBuf in
-            embeddings.withUnsafeBufferPointer { eBuf in
-                guard let qPtr = qBuf.baseAddress, let ePtr = eBuf.baseAddress else { return }
-                for i in 0..<count {
-                    vDSP_dotpr(
-                        qPtr, 1,
-                        ePtr.advanced(by: i * dimension), 1,
-                        &scores[i],
-                        vDSP_Length(dimension)
-                    )
+        scores.withUnsafeMutableBufferPointer { sBuf in
+            query.withUnsafeBufferPointer { qBuf in
+                embeddings.withUnsafeBufferPointer { eBuf in
+                    guard let sPtr = sBuf.baseAddress,
+                          let qPtr = qBuf.baseAddress,
+                          let ePtr = eBuf.baseAddress else { return }
+                    for i in 0..<self.count {
+                        vDSP_dotpr(
+                            qPtr, 1,
+                            ePtr.advanced(by: i * self.dimension), 1,
+                            sPtr.advanced(by: i),
+                            vDSP_Length(self.dimension)
+                        )
+                    }
                 }
             }
         }

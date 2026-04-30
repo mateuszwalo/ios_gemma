@@ -1,0 +1,98 @@
+# GitHub Actions workflow for building GemmaRAG iOS app.
+#
+# Produces an unsigned .app bundle (NOT .ipa) that can be signed locally
+# with Sideloadly on Windows using a free Apple ID.
+#
+# Usage:
+#   1. Push this repo to GitHub (public repo for free macOS runner minutes)
+#   2. Go to Actions tab -> "Build iOS" -> "Run workflow"
+#   3. Download the artifact (GemmaRAG.app.zip)
+#   4. Sign and install on iPad using Sideloadly on Windows
+#
+# NOTE: Code signing is disabled in this workflow on purpose.
+# Sideloadly re-signs the app with your personal Apple ID certificate.
+
+name: Build iOS
+
+on:
+  workflow_dispatch:  # Manual trigger only
+  push:
+    paths:
+      - 'ios/GemmaRAG/**'
+      - 'ios/project.yml'
+
+jobs:
+  build:
+    runs-on: macos-14  # Apple Silicon runner (M1), needed for iOS builds
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install xcodegen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+
+      - name: Resolve SPM dependencies
+        working-directory: ios
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -project GemmaRAG.xcodeproj \
+            -scheme GemmaRAG \
+            -destination 'generic/platform=iOS'
+
+      - name: Build for iOS (unsigned)
+        working-directory: ios
+        run: |
+          xcodebuild build \
+            -project GemmaRAG.xcodeproj \
+            -scheme GemmaRAG \
+            -destination 'generic/platform=iOS' \
+            -configuration Release \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ENABLE_BITCODE=NO \
+            ONLY_ACTIVE_ARCH=NO
+
+      - name: Package .app bundle
+        working-directory: ios
+        run: |
+          APP_PATH=$(find build -name "GemmaRAG.app" -type d | head -1)
+          if [ -z "$APP_PATH" ]; then
+            echo "ERROR: GemmaRAG.app not found in build output"
+            find build -name "*.app" -type d
+            exit 1
+          fi
+          echo "Found app at: $APP_PATH"
+          # Create Payload directory structure for .ipa
+          mkdir -p Payload
+          cp -R "$APP_PATH" Payload/
+          zip -r GemmaRAG.ipa Payload
+          ls -lh GemmaRAG.ipa
+
+      - name: Upload .ipa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GemmaRAG-ipa
+          path: ios/GemmaRAG.ipa
+          retention-days: 30
+
+      - name: Build summary
+        run: |
+          echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Platform: iOS (arm64)" >> $GITHUB_STEP_SUMMARY
+          echo "- Configuration: Release" >> $GITHUB_STEP_SUMMARY
+          echo "- Signing: Unsigned (use Sideloadly to sign)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next steps:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Download the GemmaRAG-ipa artifact" >> $GITHUB_STEP_SUMMARY
+          echo "2. Install Sideloadly on Windows (sideloadly.io)" >> $GITHUB_STEP_SUMMARY
+          echo "3. Connect iPad via USB" >> $GITHUB_STEP_SUMMARY
+          echo "4. Open Sideloadly, select .ipa, enter Apple ID" >> $GITHUB_STEP_SUMMARY
+          echo "5. App will be signed and installed on iPad" >> $GITHUB_STEP_SUMMARY

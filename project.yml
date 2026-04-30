@@ -1,0 +1,42 @@
+name: GemmaRAG
+options:
+  bundleIdPrefix: com.ragpoc
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "15.0"
+
+packages:
+  llama-cpp:
+    url: https://github.com/ggml-org/llama.cpp
+    branch: master
+
+targets:
+  GemmaRAG:
+    type: application
+    platform: iOS
+    sources:
+      - path: GemmaRAG
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ragpoc.GemmaRAG
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.9"
+        ENABLE_BITCODE: "NO"
+        OTHER_LDFLAGS: ["-lc++"]
+        TARGETED_DEVICE_FAMILY: "2"  # iPad only
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: "NO"
+        CODE_SIGN_IDENTITY: ""
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGNING_ALLOWED: "NO"
+    dependencies:
+      - package: llama-cpp
+        product: llama
+    info:
+      path: GemmaRAG/Info.plist
+      properties:
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        UISupportsDocumentBrowser: true
+    entitlements:
+      path: GemmaRAG/GemmaRAG.entitlements

@@ -22,25 +22,38 @@ class LlamaRunner: ObservableObject {
     }
 
     deinit {
-        unload()
+        if let s = sampler { llama_sampler_free(s) }
+        if let b = batch { llama_batch_free(b) }
+        if let c = context { llama_free(c) }
+        if let m = model { llama_model_free(m) }
         llama_backend_free()
     }
 
     func load(modelURL: URL) async throws {
         loadProgress = "Loading model..."
 
-        try await Task.detached(priority: .userInitiated) { [self] in
-            var modelParams = llama_model_default_params()
-            modelParams.n_gpu_layers = Int32(self.config.nGpuLayers)
+        let nGpuLayers = Int32(config.nGpuLayers)
+        let nCtx = UInt32(config.nCtx)
+        let nThreads = Int32(config.nThreads)
+        let temperature = config.temperature
+        let topP = config.topP
+        let topKSampling = Int32(config.topKSampling)
+        let batchSize = Int32(config.nCtx)
+        let modelPath = modelURL.path
+        let modelFilename = modelURL.lastPathComponent
 
-            guard let m = llama_model_load_from_file(modelURL.path, modelParams) else {
-                throw LlamaError.modelLoadFailed("Failed to load: \(modelURL.lastPathComponent)")
+        let result: (OpaquePointer, OpaquePointer, OpaquePointer?, OpaquePointer, llama_batch) = try await Task.detached(priority: .userInitiated) {
+            var modelParams = llama_model_default_params()
+            modelParams.n_gpu_layers = nGpuLayers
+
+            guard let m = llama_model_load_from_file(modelPath, modelParams) else {
+                throw LlamaError.modelLoadFailed("Failed to load: \(modelFilename)")
             }
 
             var ctxParams = llama_context_default_params()
-            ctxParams.n_ctx = UInt32(self.config.nCtx)
-            ctxParams.n_threads = Int32(self.config.nThreads)
-            ctxParams.n_threads_batch = Int32(self.config.nThreads)
+            ctxParams.n_ctx = nCtx
+            ctxParams.n_threads = nThreads
+            ctxParams.n_threads_batch = nThreads
 
             guard let ctx = llama_init_from_model(m, ctxParams) else {
                 llama_model_free(m)
@@ -55,23 +68,23 @@ class LlamaRunner: ObservableObject {
                 llama_model_free(m)
                 throw LlamaError.samplerCreateFailed
             }
-            llama_sampler_chain_add(chain, llama_sampler_init_temp(self.config.temperature))
-            llama_sampler_chain_add(chain, llama_sampler_init_top_p(self.config.topP, 1))
-            llama_sampler_chain_add(chain, llama_sampler_init_top_k(Int32(self.config.topKSampling)))
+            llama_sampler_chain_add(chain, llama_sampler_init_temp(temperature))
+            llama_sampler_chain_add(chain, llama_sampler_init_top_p(topP, 1))
+            llama_sampler_chain_add(chain, llama_sampler_init_top_k(topKSampling))
             llama_sampler_chain_add(chain, llama_sampler_init_dist(UInt32.max))
 
-            let b = llama_batch_init(Int32(self.config.nCtx), 0, 1)
+            let b = llama_batch_init(batchSize, 0, 1)
 
-            await MainActor.run {
-                self.model = m
-                self.context = ctx
-                self.vocab = v
-                self.sampler = chain
-                self.batch = b
-                self.isLoaded = true
-                self.loadProgress = "Model loaded"
-            }
+            return (m, ctx, v, chain, b)
         }.value
+
+        self.model = result.0
+        self.context = result.1
+        self.vocab = result.2
+        self.sampler = result.3
+        self.batch = result.4
+        self.isLoaded = true
+        self.loadProgress = "Model loaded"
     }
 
     func generate(prompt: String) async throws -> GenerationOutput {
@@ -79,11 +92,14 @@ class LlamaRunner: ObservableObject {
               let context = context,
               let vocab = vocab,
               let sampler = sampler,
-              var batch = batch else {
+              let batch = batch else {
             throw LlamaError.notLoaded
         }
 
+        let maxGenTokens = config.maxTokens
+
         return try await Task.detached(priority: .userInitiated) {
+            var localBatch = batch
             let startTime = CFAbsoluteTimeGetCurrent()
             var firstTokenTime: CFAbsoluteTime?
 
@@ -103,24 +119,23 @@ class LlamaRunner: ObservableObject {
 
             llama_memory_clear(llama_get_memory(context), true)
 
-            batch.n_tokens = 0
+            localBatch.n_tokens = 0
             for i in 0..<Int(nPromptTokens) {
-                batch.token[i] = tokens[i]
-                batch.pos?[i] = Int32(i)
-                batch.n_seq_id?[i] = 1
-                batch.seq_id?[i]?[0] = 0
-                batch.logits?[i] = 0
+                localBatch.token[i] = tokens[i]
+                localBatch.pos?[i] = Int32(i)
+                localBatch.n_seq_id?[i] = 1
+                localBatch.seq_id?[i]?[0] = 0
+                localBatch.logits?[i] = 0
             }
-            batch.logits?[Int(nPromptTokens) - 1] = 1
-            batch.n_tokens = nPromptTokens
+            localBatch.logits?[Int(nPromptTokens) - 1] = 1
+            localBatch.n_tokens = nPromptTokens
 
-            let decodeResult = llama_decode(context, batch)
+            let decodeResult = llama_decode(context, localBatch)
             guard decodeResult == 0 else {
                 throw LlamaError.decodeFailed(Int(decodeResult))
             }
 
             var outputTokens: [llama_token] = []
-            let maxGenTokens = self.config.maxTokens
             let stopStrings = ["<turn|>", "<|turn>user", "<|tool_call>"]
             var generatedText = ""
             var nCur = nPromptTokens
@@ -155,16 +170,16 @@ class LlamaRunner: ObservableObject {
                     break
                 }
 
-                batch.n_tokens = 0
-                batch.token[0] = newToken
-                batch.pos?[0] = nCur
-                batch.n_seq_id?[0] = 1
-                batch.seq_id?[0]?[0] = 0
-                batch.logits?[0] = 1
-                batch.n_tokens = 1
+                localBatch.n_tokens = 0
+                localBatch.token[0] = newToken
+                localBatch.pos?[0] = nCur
+                localBatch.n_seq_id?[0] = 1
+                localBatch.seq_id?[0]?[0] = 0
+                localBatch.logits?[0] = 1
+                localBatch.n_tokens = 1
                 nCur += 1
 
-                let res = llama_decode(context, batch)
+                let res = llama_decode(context, localBatch)
                 if res != 0 { break }
             }
 
@@ -195,7 +210,7 @@ class LlamaRunner: ObservableObject {
 
     func unload() {
         if let s = sampler { llama_sampler_free(s) }
-        if var b = batch { llama_batch_free(b) }
+        if let b = batch { llama_batch_free(b) }
         if let c = context { llama_free(c) }
         if let m = model { llama_model_free(m) }
         sampler = nil

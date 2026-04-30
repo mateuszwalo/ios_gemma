@@ -3,12 +3,7 @@ options:
   bundleIdPrefix: com.ragpoc
   deploymentTarget:
     iOS: "17.0"
-  xcodeVersion: "15.0"
-
-packages:
-  llama-cpp:
-    url: https://github.com/ggml-org/llama.cpp
-    branch: master
+  xcodeVersion: "16.0"
 
 targets:
   GemmaRAG:
@@ -24,14 +19,14 @@ targets:
         SWIFT_VERSION: "5.9"
         ENABLE_BITCODE: "NO"
         OTHER_LDFLAGS: ["-lc++"]
-        TARGETED_DEVICE_FAMILY: "2"  # iPad only
+        TARGETED_DEVICE_FAMILY: "2"
         SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: "NO"
         CODE_SIGN_IDENTITY: ""
         CODE_SIGNING_REQUIRED: "NO"
         CODE_SIGNING_ALLOWED: "NO"
     dependencies:
-      - package: llama-cpp
-        product: llama
+      - framework: llama.xcframework
+        embed: true
     info:
       path: GemmaRAG/Info.plist
       properties:

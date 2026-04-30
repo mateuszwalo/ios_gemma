@@ -21,27 +21,31 @@ on:
       - 'GemmaRAG/**'
       - 'project.yml'
 
+env:
+  LLAMA_CPP_RELEASE: b8968
+
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 60
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download llama.cpp XCFramework
+        run: |
+          curl -L -o llama-xcframework.zip \
+            "https://github.com/ggml-org/llama.cpp/releases/download/${LLAMA_CPP_RELEASE}/llama-${LLAMA_CPP_RELEASE}-xcframework.zip"
+          unzip -q llama-xcframework.zip
+          mv build-apple/llama.xcframework .
+          rm -rf build-apple llama-xcframework.zip
+
       - name: Install xcodegen
         run: brew install xcodegen
 
       - name: Generate Xcode project
         run: xcodegen generate
-
-      - name: Resolve SPM dependencies
-        run: |
-          xcodebuild -resolvePackageDependencies \
-            -project GemmaRAG.xcodeproj \
-            -scheme GemmaRAG \
-            -destination 'generic/platform=iOS'
 
       - name: Build for iOS (unsigned)
         run: |
@@ -83,6 +87,7 @@ jobs:
           echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
           echo "- Platform: iOS (arm64)" >> $GITHUB_STEP_SUMMARY
           echo "- Configuration: Release" >> $GITHUB_STEP_SUMMARY
+          echo "- llama.cpp: ${LLAMA_CPP_RELEASE}" >> $GITHUB_STEP_SUMMARY
           echo "- Signing: Unsigned (use Sideloadly to sign)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Next steps:" >> $GITHUB_STEP_SUMMARY

@@ -2,8 +2,7 @@ import Foundation
 import llama
 
 /// Swift wrapper for llama.cpp GGUF inference.
-/// Mirrors Python's GemmaRunner — loads GGUF, tokenizes, generates with streaming TTFT measurement.
-/// Uses Metal GPU acceleration on iPad M4 (unlike Python's CPU-only simulation).
+/// Uses Metal GPU acceleration on iPad M4.
 @MainActor
 class LlamaRunner: ObservableObject {
     @Published var isLoaded = false
@@ -11,20 +10,22 @@ class LlamaRunner: ObservableObject {
 
     private var model: OpaquePointer?
     private var context: OpaquePointer?
+    private var vocab: OpaquePointer?
     private var sampler: OpaquePointer?
+    private var batch: llama_batch?
 
     private var config: RAGConfig
 
     init(config: RAGConfig = RAGConfig()) {
         self.config = config
+        llama_backend_init()
     }
 
     deinit {
         unload()
+        llama_backend_free()
     }
 
-    /// Load GGUF model from file URL.
-    /// Call from background thread for large models.
     func load(modelURL: URL) async throws {
         loadProgress = "Loading model..."
 
@@ -46,7 +47,8 @@ class LlamaRunner: ObservableObject {
                 throw LlamaError.contextCreateFailed
             }
 
-            // Build sampler chain
+            let v = llama_model_get_vocab(m)
+
             let samplerChainParams = llama_sampler_chain_default_params()
             guard let chain = llama_sampler_chain_init(samplerChainParams) else {
                 llama_free(ctx)
@@ -58,20 +60,26 @@ class LlamaRunner: ObservableObject {
             llama_sampler_chain_add(chain, llama_sampler_init_top_k(Int32(self.config.topKSampling)))
             llama_sampler_chain_add(chain, llama_sampler_init_dist(UInt32.max))
 
+            let b = llama_batch_init(Int32(self.config.nCtx), 0, 1)
+
             await MainActor.run {
                 self.model = m
                 self.context = ctx
+                self.vocab = v
                 self.sampler = chain
+                self.batch = b
                 self.isLoaded = true
                 self.loadProgress = "Model loaded"
             }
         }.value
     }
 
-    /// Generate text from a prompt, measuring TTFT and tokens/s.
-    /// Mirrors Python GemmaRunner.generate() with streaming token measurement.
     func generate(prompt: String) async throws -> GenerationOutput {
-        guard let model = model, let context = context, let sampler = sampler else {
+        guard let model = model,
+              let context = context,
+              let vocab = vocab,
+              let sampler = sampler,
+              var batch = batch else {
             throw LlamaError.notLoaded
         }
 
@@ -79,42 +87,48 @@ class LlamaRunner: ObservableObject {
             let startTime = CFAbsoluteTimeGetCurrent()
             var firstTokenTime: CFAbsoluteTime?
 
-            // Tokenize prompt
             let promptCStr = prompt.cString(using: .utf8)!
             let maxTokens = Int32(prompt.utf8.count + 128)
             var tokens = [llama_token](repeating: 0, count: Int(maxTokens))
             let nPromptTokens = llama_tokenize(
-                model, promptCStr, Int32(promptCStr.count - 1),
+                vocab, promptCStr, Int32(promptCStr.count - 1),
                 &tokens, maxTokens,
-                true,  // add_special (BOS)
-                false  // parse_special
+                true,
+                false
             )
             guard nPromptTokens > 0 else {
                 throw LlamaError.tokenizationFailed
             }
             tokens = Array(tokens.prefix(Int(nPromptTokens)))
 
-            // Clear KV cache for fresh generation
-            llama_kv_cache_clear(context)
+            llama_memory_clear(llama_get_memory(context), true)
 
-            // Decode prompt tokens
-            var batch = llama_batch_get_one(&tokens, Int32(tokens.count))
+            batch.n_tokens = 0
+            for i in 0..<Int(nPromptTokens) {
+                batch.token[i] = tokens[i]
+                batch.pos?[i] = Int32(i)
+                batch.n_seq_id?[i] = 1
+                batch.seq_id?[i]?[0] = 0
+                batch.logits?[i] = 0
+            }
+            batch.logits?[Int(nPromptTokens) - 1] = 1
+            batch.n_tokens = nPromptTokens
+
             let decodeResult = llama_decode(context, batch)
             guard decodeResult == 0 else {
                 throw LlamaError.decodeFailed(Int(decodeResult))
             }
 
-            // Generate tokens one by one
             var outputTokens: [llama_token] = []
             let maxGenTokens = self.config.maxTokens
             let stopStrings = ["<turn|>", "<|turn>user", "<|tool_call>"]
             var generatedText = ""
+            var nCur = nPromptTokens
 
             for _ in 0..<maxGenTokens {
                 let newToken = llama_sampler_sample(sampler, context, -1)
 
-                // Check for EOS
-                if llama_vocab_is_eog(model, newToken) {
+                if llama_vocab_is_eog(vocab, newToken) {
                     break
                 }
 
@@ -124,18 +138,15 @@ class LlamaRunner: ObservableObject {
 
                 outputTokens.append(newToken)
 
-                // Convert token to text
                 var buf = [CChar](repeating: 0, count: 256)
-                let n = llama_token_to_piece(model, newToken, &buf, Int32(buf.count), 0, false)
+                let n = llama_token_to_piece(vocab, newToken, &buf, Int32(buf.count), 0, false)
                 if n > 0 {
                     let piece = String(cString: buf.prefix(Int(n)) + [0])
                     generatedText += piece
                 }
 
-                // Check for stop strings
                 let shouldStop = stopStrings.contains { generatedText.contains($0) }
                 if shouldStop {
-                    // Trim stop string from output
                     for stop in stopStrings {
                         if let range = generatedText.range(of: stop) {
                             generatedText = String(generatedText[..<range.lowerBound])
@@ -144,9 +155,15 @@ class LlamaRunner: ObservableObject {
                     break
                 }
 
-                // Prepare batch for next token
-                var tokenArr = [newToken]
-                batch = llama_batch_get_one(&tokenArr, 1)
+                batch.n_tokens = 0
+                batch.token[0] = newToken
+                batch.pos?[0] = nCur
+                batch.n_seq_id?[0] = 1
+                batch.seq_id?[0]?[0] = 0
+                batch.logits?[0] = 1
+                batch.n_tokens = 1
+                nCur += 1
+
                 let res = llama_decode(context, batch)
                 if res != 0 { break }
             }
@@ -178,11 +195,14 @@ class LlamaRunner: ObservableObject {
 
     func unload() {
         if let s = sampler { llama_sampler_free(s) }
+        if var b = batch { llama_batch_free(b) }
         if let c = context { llama_free(c) }
         if let m = model { llama_model_free(m) }
         sampler = nil
+        batch = nil
         context = nil
         model = nil
+        vocab = nil
         isLoaded = false
         loadProgress = ""
     }

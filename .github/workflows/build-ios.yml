@@ -49,6 +49,7 @@ jobs:
 
       - name: Build for iOS (unsigned)
         run: |
+          set -o pipefail
           xcodebuild build \
             -project GemmaRAG.xcodeproj \
             -scheme GemmaRAG \
@@ -59,7 +60,16 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             ENABLE_BITCODE=NO \
-            ONLY_ACTIVE_ARCH=NO
+            ONLY_ACTIVE_ARCH=NO \
+            2>&1 | tee build.log
+          BUILD_EXIT=$?
+          if [ $BUILD_EXIT -ne 0 ]; then
+            echo ""
+            echo "========== SWIFT COMPILATION ERRORS =========="
+            grep -E "error:|warning:" build.log | head -80
+            echo "========== END ERRORS =========="
+            exit $BUILD_EXIT
+          fi
 
       - name: Package .app bundle
         run: |

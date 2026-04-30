@@ -1,8 +1,21 @@
 import Foundation
 import llama
 
-/// Swift wrapper for llama.cpp GGUF inference.
-/// Uses Metal GPU acceleration on iPad M4.
+private func llama_batch_clear(_ batch: inout llama_batch) {
+    batch.n_tokens = 0
+}
+
+private func llama_batch_add(_ batch: inout llama_batch, _ id: llama_token, _ pos: llama_pos, _ seq_ids: [llama_seq_id], _ logits: Bool) {
+    batch.token[Int(batch.n_tokens)] = id
+    batch.pos[Int(batch.n_tokens)] = pos
+    batch.n_seq_id[Int(batch.n_tokens)] = Int32(seq_ids.count)
+    for i in 0..<seq_ids.count {
+        batch.seq_id[Int(batch.n_tokens)]![i] = seq_ids[i]
+    }
+    batch.logits[Int(batch.n_tokens)] = logits ? 1 : 0
+    batch.n_tokens += 1
+}
+
 @MainActor
 class LlamaRunner: ObservableObject {
     @Published var isLoaded = false
@@ -99,7 +112,7 @@ class LlamaRunner: ObservableObject {
         let maxGenTokens = config.maxTokens
 
         return try await Task.detached(priority: .userInitiated) {
-            var localBatch = batch
+            var batch = batch
             let startTime = CFAbsoluteTimeGetCurrent()
             var firstTokenTime: CFAbsoluteTime?
 
@@ -119,18 +132,13 @@ class LlamaRunner: ObservableObject {
 
             llama_memory_clear(llama_get_memory(context), true)
 
-            localBatch.n_tokens = 0
+            llama_batch_clear(&batch)
             for i in 0..<Int(nPromptTokens) {
-                localBatch.token[i] = tokens[i]
-                localBatch.pos?[i] = Int32(i)
-                localBatch.n_seq_id?[i] = 1
-                localBatch.seq_id?[i]?[0] = 0
-                localBatch.logits?[i] = 0
+                let isLast = (i == Int(nPromptTokens) - 1)
+                llama_batch_add(&batch, tokens[i], Int32(i), [0], isLast)
             }
-            localBatch.logits?[Int(nPromptTokens) - 1] = 1
-            localBatch.n_tokens = nPromptTokens
 
-            let decodeResult = llama_decode(context, localBatch)
+            let decodeResult = llama_decode(context, batch)
             guard decodeResult == 0 else {
                 throw LlamaError.decodeFailed(Int(decodeResult))
             }
@@ -170,16 +178,11 @@ class LlamaRunner: ObservableObject {
                     break
                 }
 
-                localBatch.n_tokens = 0
-                localBatch.token[0] = newToken
-                localBatch.pos?[0] = nCur
-                localBatch.n_seq_id?[0] = 1
-                localBatch.seq_id?[0]?[0] = 0
-                localBatch.logits?[0] = 1
-                localBatch.n_tokens = 1
+                llama_batch_clear(&batch)
+                llama_batch_add(&batch, newToken, nCur, [0], true)
                 nCur += 1
 
-                let res = llama_decode(context, localBatch)
+                let res = llama_decode(context, batch)
                 if res != 0 { break }
             }
 

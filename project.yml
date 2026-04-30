@@ -17,6 +17,7 @@ targets:
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "5.9"
+        SWIFT_STRICT_CONCURRENCY: "minimal"
         ENABLE_BITCODE: "NO"
         OTHER_LDFLAGS: ["-lc++"]
         TARGETED_DEVICE_FAMILY: "2"

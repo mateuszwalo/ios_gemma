@@ -25,7 +25,7 @@ class LlamaRunner: ObservableObject {
     private var model: OpaquePointer?
     private var context: OpaquePointer?
     private var vocab: OpaquePointer?
-    private var sampler: OpaquePointer?
+    private var sampler: UnsafeMutablePointer<llama_sampler>?
     private var batch: llama_batch?
 
     private var config: RAGConfig
@@ -56,7 +56,7 @@ class LlamaRunner: ObservableObject {
         let modelPath = modelURL.path
         let modelFilename = modelURL.lastPathComponent
 
-        let result: (OpaquePointer, OpaquePointer, OpaquePointer?, OpaquePointer, llama_batch) = try await Task.detached(priority: .userInitiated) {
+        let result: (OpaquePointer, OpaquePointer, OpaquePointer?, UnsafeMutablePointer<llama_sampler>, llama_batch) = try await Task.detached(priority: .userInitiated) {
             var modelParams = llama_model_default_params()
             modelParams.n_gpu_layers = nGpuLayers
 

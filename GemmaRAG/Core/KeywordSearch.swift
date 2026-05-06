@@ -32,7 +32,7 @@ class KeywordSearch {
     /// Matches Python _tokenize().
     static func tokenize(_ text: String) -> Set<String> {
         let lowered = text.lowercased()
-        let pattern = try! NSRegularExpression(pattern: "[a-z0-9]{3,}")
+        let pattern = try! NSRegularExpression(pattern: "[a-z0-9]{2,}")
         let range = NSRange(lowered.startIndex..., in: lowered)
         let matches = pattern.matches(in: lowered, range: range)
 

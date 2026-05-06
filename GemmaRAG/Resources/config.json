@@ -4,7 +4,7 @@
     "search_pool_k": 12,
     "rerank_alpha": 0.65,
     "source_boost": 0.08,
-    "max_context_chars": 1400,
+    "max_context_chars": 4000,
     "max_context_chunks": 3,
     "max_images": 1,
     "min_retrieval_confidence": 0.33,

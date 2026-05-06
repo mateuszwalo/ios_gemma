@@ -128,7 +128,7 @@ struct RAGConfig {
     var searchPoolK: Int = 12
     var rerankAlpha: Float = 0.65
     var sourceBoost: Float = 0.08
-    var maxContextChars: Int = 1400
+    var maxContextChars: Int = 4000
     var maxContextChunks: Int = 3
     var maxImages: Int = 1
     var minRetrievalConfidence: Float = 0.33
@@ -143,17 +143,16 @@ struct RAGConfig {
     var nGpuLayers: Int = 99  // Use Metal on iPad (unlike Python CPU-only simulation)
 
     var promptTemplate: String = """
-    <|turn>system
+    <start_of_turn>user
     You are a field assistant helping store employees with product standards and planograms.
     Answer ONLY based on the provided context.
     If the context does not contain the answer, say "I could not find the answer in the documents."
-    Be concise and precise. Always respond in English.<turn|>
-    <|turn>user
+    Be concise and precise. Always respond in English.
+
     CONTEXT:
     {context}
 
-    QUESTION: {question}<turn|>
-    <|turn>model
-
+    QUESTION: {question}<end_of_turn>
+    <start_of_turn>model
     """
 }

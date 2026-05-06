@@ -145,7 +145,7 @@ class LlamaRunner: ObservableObject {
             }
 
             var outputTokens: [llama_token] = []
-            let stopStrings = ["<turn|>", "<|turn>user", "<|tool_call>"]
+            let stopStrings = ["<end_of_turn>", "<start_of_turn>"]
             var generatedText = ""
             var nCur = nPromptTokens
 

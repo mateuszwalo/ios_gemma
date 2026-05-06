@@ -92,6 +92,7 @@ struct ChatMessage: Identifiable {
     let id = UUID()
     let role: MessageRole
     let text: String
+    var thinking: String? = nil
     let images: [String]
     let metrics: MessageMetrics?
     let timestamp: Date
@@ -124,16 +125,16 @@ enum ModelLoadState: Equatable {
 // MARK: - RAG Config (mirrors base.yaml RAG section)
 
 struct RAGConfig {
-    var topK: Int = 3
-    var searchPoolK: Int = 12
+    var topK: Int = 5
+    var searchPoolK: Int = 20
     var rerankAlpha: Float = 0.65
     var sourceBoost: Float = 0.08
     var maxContextChars: Int = 4000
-    var maxContextChunks: Int = 3
-    var maxImages: Int = 1
-    var minRetrievalConfidence: Float = 0.33
-    var imageMinConfidence: Float = 0.52
-    var minImageOcrMatch: Float = 0.02
+    var maxContextChunks: Int = 5
+    var maxImages: Int = 2
+    var minRetrievalConfidence: Float = 0.15
+    var imageMinConfidence: Float = 0.20
+    var minImageOcrMatch: Float = 0.0
     var nCtx: Int = 4096
     var nThreads: Int = 4
     var temperature: Float = 1.0
@@ -142,17 +143,5 @@ struct RAGConfig {
     var maxTokens: Int = 512
     var nGpuLayers: Int = 99  // Use Metal on iPad (unlike Python CPU-only simulation)
 
-    var promptTemplate: String = """
-    <start_of_turn>user
-    You are a field assistant helping store employees with product standards and planograms.
-    Answer ONLY based on the provided context.
-    If the context does not contain the answer, say "I could not find the answer in the documents."
-    Be concise and precise. Always respond in English.
-
-    CONTEXT:
-    {context}
-
-    QUESTION: {question}<end_of_turn>
-    <start_of_turn>model
-    """
+    var promptTemplate: String = "<start_of_turn>user\nYou are a field assistant helping store employees with product standards and planograms. Answer based on the provided context. Be concise and precise. Always respond in English.\n\nCONTEXT:\n{context}\n\nQUESTION: {question}<end_of_turn>\n<start_of_turn>model\n"
 }

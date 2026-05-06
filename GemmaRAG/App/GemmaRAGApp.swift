@@ -12,7 +12,6 @@ struct GemmaRAGApp: App {
     }
 }
 
-/// Central app state: manages model loading, chunk store, vector store, and pipeline.
 @MainActor
 class AppState: ObservableObject {
     @Published var modelState: ModelLoadState = .notLoaded
@@ -28,6 +27,7 @@ class AppState: ObservableObject {
 
     init() {
         loadBundledData()
+        Task { await autoLoadModel() }
     }
 
     func loadBundledData() {
@@ -47,6 +47,21 @@ class AppState: ObservableObject {
         } catch {
             addSystemMessage("Failed to load data: \(error.localizedDescription)")
         }
+    }
+
+    func autoLoadModel() async {
+        let docsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fm = FileManager.default
+        guard let files = try? fm.contentsOfDirectory(at: docsDir, includingPropertiesForKeys: [.fileSizeKey]) else { return }
+
+        let ggufFiles = files.filter { $0.pathExtension.lowercased() == "gguf" }
+        guard let modelURL = ggufFiles.first else { return }
+
+        let fileSize = (try? modelURL.resourceValues(forKeys: [.fileSizeKey]))?.fileSize ?? 0
+        guard fileSize > 100_000_000 else { return }
+
+        addSystemMessage("Found model: \(modelURL.lastPathComponent), loading...")
+        await loadModel(url: modelURL)
     }
 
     func loadModel(url: URL) async {
@@ -84,9 +99,14 @@ class AppState: ObservableObject {
                 question: question,
                 includeImages: includeImages
             )
+
+            let cleanedAnswer = Self.cleanModelOutput(response.answer)
+            let thinking = Self.extractThinking(response.answer)
+
             messages.append(ChatMessage(
                 role: .assistant,
-                text: response.answer,
+                text: cleanedAnswer,
+                thinking: thinking,
                 images: response.associatedImages,
                 metrics: ChatMessage.MessageMetrics(
                     tokensPerSecond: response.tokensPerSecond,
@@ -108,6 +128,45 @@ class AppState: ObservableObject {
             ))
         }
         isGenerating = false
+    }
+
+    static func extractThinking(_ text: String) -> String? {
+        guard let startRange = text.range(of: "<think>"),
+              let endRange = text.range(of: "</think>") else { return nil }
+        let thinking = String(text[startRange.upperBound..<endRange.lowerBound])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return thinking.isEmpty ? nil : thinking
+    }
+
+    static func cleanModelOutput(_ text: String) -> String {
+        var result = text
+
+        if let thinkStart = result.range(of: "<think>"),
+           let thinkEnd = result.range(of: "</think>") {
+            result = String(result[thinkEnd.upperBound...])
+        }
+
+        let markers = [
+            "<start_of_turn>", "<end_of_turn>",
+            "<start_of_turn>model", "<start_of_turn>user",
+            "<|turn>", "<turn|>", "<|turn>model", "<|turn>user",
+            "<|tool_call>", "</think>", "<think>",
+            "model\n",
+        ]
+        for marker in markers {
+            result = result.replacingOccurrences(of: marker, with: "")
+        }
+
+        result = result.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if result.hasPrefix("_response>") || result.hasPrefix("_turn>") {
+            if let idx = result.firstIndex(of: ">") {
+                result = String(result[result.index(after: idx)...])
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+        }
+
+        return result
     }
 
     private func addSystemMessage(_ text: String) {

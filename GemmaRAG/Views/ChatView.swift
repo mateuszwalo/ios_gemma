@@ -29,20 +29,15 @@ struct ChatView: View {
     @EnvironmentObject var appState: AppState
     @State private var inputText = ""
     @State private var includeImages = false
+    @State private var showSamples = true
     @FocusState private var isInputFocused: Bool
-
-    private var showSampleQueries: Bool {
-        appState.messages.filter { $0.role == .user }.isEmpty && !appState.isGenerating
-    }
 
     var body: some View {
         VStack(spacing: 0) {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(spacing: 12) {
-                        if showSampleQueries {
-                            sampleQueriesSection
-                        }
+                        sampleQueriesSection
 
                         ForEach(appState.messages) { message in
                             MessageView(
@@ -116,32 +111,57 @@ struct ChatView: View {
     }
 
     private var sampleQueriesSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Text-only queries")
-                .font(.caption.bold())
+        VStack(alignment: .leading, spacing: 0) {
+            Button(action: { withAnimation { showSamples.toggle() } }) {
+                HStack {
+                    Image(systemName: "list.bullet.rectangle")
+                    Text("Sample queries")
+                        .font(.caption.bold())
+                    Spacer()
+                    Image(systemName: showSamples ? "chevron.up" : "chevron.down")
+                }
                 .foregroundColor(.secondary)
                 .padding(.horizontal)
-
-            FlowLayout(spacing: 8) {
-                ForEach(textQueries) { q in
-                    SampleQueryButton(query: q) { tappedQuery(q) }
-                }
+                .padding(.vertical, 8)
             }
-            .padding(.horizontal)
+            .buttonStyle(.plain)
 
-            Text("Queries with evidence images")
-                .font(.caption.bold())
-                .foregroundColor(.secondary)
-                .padding(.horizontal)
+            if showSamples {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Text only")
+                        .font(.caption2.bold())
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal)
 
-            FlowLayout(spacing: 8) {
-                ForEach(imageQueries) { q in
-                    SampleQueryButton(query: q) { tappedQuery(q) }
+                    FlowLayout(spacing: 6) {
+                        ForEach(textQueries) { q in
+                            SampleQueryButton(query: q, disabled: appState.isGenerating) {
+                                tappedQuery(q)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+
+                    Text("With evidence images")
+                        .font(.caption2.bold())
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal)
+
+                    FlowLayout(spacing: 6) {
+                        ForEach(imageQueries) { q in
+                            SampleQueryButton(query: q, disabled: appState.isGenerating) {
+                                tappedQuery(q)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
                 }
+                .padding(.bottom, 12)
             }
-            .padding(.horizontal)
         }
-        .padding(.vertical, 12)
+        .background(Color(.systemGray6).opacity(0.5))
+        .cornerRadius(8)
+        .padding(.horizontal, 8)
     }
 
     private func tappedQuery(_ query: SampleQuery) {
@@ -165,6 +185,7 @@ struct ChatView: View {
 
 struct SampleQueryButton: View {
     let query: SampleQuery
+    let disabled: Bool
     let action: () -> Void
 
     var body: some View {
@@ -173,21 +194,23 @@ struct SampleQueryButton: View {
                 Image(systemName: query.needsImages ? "photo" : "text.bubble")
                     .font(.caption2)
                 Text(query.text)
-                    .font(.caption)
+                    .font(.caption2)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
             }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
             .background(query.needsImages ? Color.purple.opacity(0.1) : Color.blue.opacity(0.1))
             .foregroundColor(query.needsImages ? .purple : .blue)
-            .cornerRadius(10)
+            .cornerRadius(8)
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 8)
                     .stroke(query.needsImages ? Color.purple.opacity(0.3) : Color.blue.opacity(0.3), lineWidth: 1)
             )
         }
         .buttonStyle(.plain)
+        .disabled(disabled)
+        .opacity(disabled ? 0.5 : 1)
     }
 }
 
@@ -195,8 +218,7 @@ struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let result = layout(proposal: proposal, subviews: subviews)
-        return result.size
+        layout(proposal: proposal, subviews: subviews).size
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {

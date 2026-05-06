@@ -1,15 +1,15 @@
 {
   "rag": {
-    "top_k": 3,
-    "search_pool_k": 12,
+    "top_k": 5,
+    "search_pool_k": 20,
     "rerank_alpha": 0.65,
     "source_boost": 0.08,
     "max_context_chars": 4000,
-    "max_context_chunks": 3,
-    "max_images": 1,
-    "min_retrieval_confidence": 0.33,
-    "image_min_confidence": 0.52,
-    "min_image_ocr_match": 0.02
+    "max_context_chunks": 5,
+    "max_images": 2,
+    "min_retrieval_confidence": 0.15,
+    "image_min_confidence": 0.20,
+    "min_image_ocr_match": 0.0
   },
   "llm": {
     "n_ctx": 4096,

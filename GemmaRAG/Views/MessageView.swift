@@ -4,6 +4,8 @@ struct MessageView: View {
     let message: ChatMessage
     let resolveImage: (String) -> URL?
 
+    @State private var showThinking = false
+
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             if message.role == .assistant || message.role == .system {
@@ -12,15 +14,39 @@ struct MessageView: View {
             if message.role == .user { Spacer() }
 
             VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 6) {
-                // Main text
+                if let thinking = message.thinking, !thinking.isEmpty {
+                    Button(action: { showThinking.toggle() }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: showThinking ? "brain.head.profile.fill" : "brain.head.profile")
+                            Text(showThinking ? "Hide reasoning" : "Show reasoning")
+                        }
+                        .font(.caption2)
+                        .foregroundColor(.orange)
+                    }
+                    .buttonStyle(.plain)
+
+                    if showThinking {
+                        Text(thinking)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(8)
+                            .background(Color.orange.opacity(0.08))
+                            .cornerRadius(8)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.orange.opacity(0.2), lineWidth: 1)
+                            )
+                    }
+                }
+
                 Text(message.text)
                     .font(message.role == .system ? .caption : .body)
                     .foregroundColor(message.role == .system ? .secondary : .primary)
+                    .textSelection(.enabled)
                     .padding(10)
                     .background(bubbleBackground)
                     .cornerRadius(12)
 
-                // Evidence images
                 if !message.images.isEmpty {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Evidence Images")
@@ -36,12 +62,11 @@ struct MessageView: View {
                     }
                 }
 
-                // Performance metrics
                 if let metrics = message.metrics {
                     MetricsView(metrics: metrics)
                 }
             }
-            .frame(maxWidth: UIScreen.main.bounds.width * 0.8, alignment: message.role == .user ? .trailing : .leading)
+            .frame(maxWidth: UIScreen.main.bounds.width * 0.85, alignment: message.role == .user ? .trailing : .leading)
 
             if message.role == .user { roleIcon }
             if message.role == .assistant || message.role == .system { Spacer() }

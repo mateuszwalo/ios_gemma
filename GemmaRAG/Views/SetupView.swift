@@ -108,19 +108,25 @@ struct SetupView: View {
 
             selectedModelName = url.lastPathComponent
 
-            // Copy to app's documents directory for persistent access
-            Task {
+                Task {
                 do {
                     let docsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                     let destURL = docsDir.appendingPathComponent(url.lastPathComponent)
 
-                    if FileManager.default.fileExists(atPath: destURL.path) {
-                        try FileManager.default.removeItem(at: destURL)
-                    }
-                    try FileManager.default.copyItem(at: url, to: destURL)
-                    url.stopAccessingSecurityScopedResource()
+                    let sourceResolved = url.resolvingSymlinksInPath()
+                    let destResolved = destURL.resolvingSymlinksInPath()
 
-                    await appState.loadModel(url: destURL)
+                    if sourceResolved == destResolved {
+                        url.stopAccessingSecurityScopedResource()
+                        await appState.loadModel(url: destURL)
+                    } else {
+                        if FileManager.default.fileExists(atPath: destURL.path) {
+                            try FileManager.default.removeItem(at: destURL)
+                        }
+                        try FileManager.default.copyItem(at: url, to: destURL)
+                        url.stopAccessingSecurityScopedResource()
+                        await appState.loadModel(url: destURL)
+                    }
                 } catch {
                     url.stopAccessingSecurityScopedResource()
                     appState.modelState = .error("File copy failed: \(error.localizedDescription)")

@@ -21,9 +21,9 @@ class AppState: ObservableObject {
 
     let chunkStore = ChunkStore()
     let vectorStore = VectorStore()
-    let llamaRunner = LlamaRunner()
-    var pipeline: RAGPipeline?
     var config = RAGConfig()
+    lazy var llamaRunner = LlamaRunner(config: config)
+    var pipeline: RAGPipeline?
 
     init() {
         loadBundledData()
@@ -128,6 +128,11 @@ class AppState: ObservableObject {
             ))
         }
         isGenerating = false
+    }
+
+    func clearChat() {
+        messages.removeAll()
+        addSystemMessage("Chat cleared. Model ready.")
     }
 
     static func extractThinking(_ text: String) -> String? {

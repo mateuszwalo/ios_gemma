@@ -8,15 +8,15 @@
     "max_context_chunks": 5,
     "max_images": 2,
     "min_retrieval_confidence": 0.10,
-    "image_min_confidence": 0.15,
+    "image_min_confidence": 0.10,
     "min_image_ocr_match": 0.0
   },
   "llm": {
     "n_ctx": 4096,
     "n_threads": 4,
-    "temperature": 1.0,
-    "top_p": 0.95,
-    "top_k": 64,
+    "temperature": 0.3,
+    "top_p": 0.90,
+    "top_k": 40,
     "max_tokens": 512,
     "n_gpu_layers": 99
   },

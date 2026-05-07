@@ -33,9 +33,8 @@ class RAGPipeline {
     func query(question: String, includeImages: Bool = false) async throws -> RAGResponse {
         let overallStart = CFAbsoluteTimeGetCurrent()
 
-        let visualIntent = KeywordSearch.isVisualIntent(question)
         let (normalizedQuestion, factualQuestion) = KeywordSearch.normalizeQuestion(question)
-        let allowImages = includeImages && visualIntent && config.maxImages > 0
+        let allowImages = includeImages && config.maxImages > 0
 
         // 1. Keyword search for initial candidates
         let embeddingStart = CFAbsoluteTimeGetCurrent()
@@ -175,6 +174,8 @@ class RAGPipeline {
 
             // Collect image candidates
             if allowImages {
+                let topSourceFile = selectedItems.first?.chunk.sourceFile ?? ""
+                let sameSource = item.chunk.sourceFile == topSourceFile
                 for img in item.chunk.associatedImages {
                     let ocrMatch: Float
                     if let ocr = img.ocrSnippet, !ocr.isEmpty {
@@ -183,14 +184,14 @@ class RAGPipeline {
                         ocrMatch = 0
                     }
 
-                    let area = Float(img.width * img.height)
-                    let score = area
-                        + Float(1.0 / (1.0 + Float(rank))) * 50_000.0
-                        + item.denseScore * 25_000.0
-                        + item.sourceScore * 40_000.0
-                        + ocrMatch * 50_000.0
-                        - (img.ocrSnippet?.isEmpty ?? true ? 35_000.0 : 0)
-                        + Float(img.textDensity ?? 0) * 25_000.0
+                    let rankBonus = Float(1.0 / (1.0 + Float(rank))) * 40_000.0
+                    let sourceBonus: Float = sameSource ? 60_000.0 : 0
+                    let denseBonus = item.denseScore * 30_000.0
+                    let ocrBonus = ocrMatch * 50_000.0
+                    let hasOcrPenalty: Float = (img.ocrSnippet?.isEmpty ?? true) ? -30_000.0 : 0
+                    let densityBonus = Float(img.textDensity ?? 0) * 20_000.0
+
+                    let score = rankBonus + sourceBonus + denseBonus + ocrBonus + hasOcrPenalty + densityBonus
 
                     imageCandidates.append((path: img.path, score: score, ocrMatch: ocrMatch))
                 }

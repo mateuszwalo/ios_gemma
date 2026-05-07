@@ -133,15 +133,15 @@ struct RAGConfig {
     var maxContextChunks: Int = 5
     var maxImages: Int = 2
     var minRetrievalConfidence: Float = 0.10
-    var imageMinConfidence: Float = 0.15
+    var imageMinConfidence: Float = 0.10
     var minImageOcrMatch: Float = 0.0
     var nCtx: Int = 4096
     var nThreads: Int = 4
-    var temperature: Float = 1.0
-    var topP: Float = 0.95
-    var topKSampling: Int = 64
+    var temperature: Float = 0.3
+    var topP: Float = 0.90
+    var topKSampling: Int = 40
     var maxTokens: Int = 512
     var nGpuLayers: Int = 99  // Use Metal on iPad (unlike Python CPU-only simulation)
 
-    var promptTemplate: String = "<start_of_turn>user\nYou are a field assistant helping store employees with product standards and planograms. Answer based on the provided context. Be concise and precise. Always respond in English.\n\nCONTEXT:\n{context}\n\nQUESTION: {question}<end_of_turn>\n<start_of_turn>model\n"
+    var promptTemplate: String = "<start_of_turn>user\nYou are a field assistant answering questions about Red Bull VIP Opt-In contracts and product standards. Answer ONLY from the context below. Include exact dollar amounts, percentages, and specific numbers when available. Be concise and precise. Always respond in English.\n\nCONTEXT:\n{context}\n\nQUESTION: {question}<end_of_turn>\n<start_of_turn>model\n"
 }

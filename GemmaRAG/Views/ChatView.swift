@@ -6,23 +6,46 @@ struct SampleQuery: Identifiable {
     let needsImages: Bool
 }
 
-private let textQueries: [SampleQuery] = [
-    SampleQuery(text: "What are the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz in RBDC Platinum Groc?", needsImages: false),
-    SampleQuery(text: "What are the EDLP price limits for 8.4oz, 12oz, and 16oz singles?", needsImages: false),
-    SampleQuery(text: "What is the Strike Zone requirement for Red Bull shelf placement?", needsImages: false),
-    SampleQuery(text: "Is Red Bull North America Inc. a party to the VIP Opt-In Contract?", needsImages: false),
-    SampleQuery(text: "Compare Platinum, Diamond, and Double Diamond: what are the 8.4 oz shelf discounts and case costs?", needsImages: false),
-    SampleQuery(text: "What are the Suggested Retail Prices for 8.4oz, 12oz, 16oz, and 20oz?", needsImages: false),
-    SampleQuery(text: "In Triple Diamond Conv, what are the three pricing tiers and their 8.4 oz case costs?", needsImages: false),
+// MARK: - Pricing queries (answers verifiable from contract data)
+private let pricingQueries: [SampleQuery] = [
+    SampleQuery(text: "In Platinum Groc, what is the 8.4 oz Shelf Discount and Case Cost?", needsImages: false),
+    SampleQuery(text: "In Diamond Groc, what are the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz?", needsImages: false),
+    SampleQuery(text: "In Double Diamond Groc, what is the 8.4 oz Shelf + Cold Cashier Discount and Case Cost?", needsImages: false),
+    SampleQuery(text: "In Triple Diamond Groc, what are the Shelf Program case costs for 8.4 oz and 12 oz?", needsImages: false),
+    SampleQuery(text: "In Triple Diamond Conv, what are the three discount tiers and 8.4 oz case costs for each?", needsImages: false),
+    SampleQuery(text: "In Platinum Liquor, what is the 8.4 oz Shelf Discount and Case Cost?", needsImages: false),
     SampleQuery(text: "What is the 16 oz EDLP Case Discount and resulting Case Cost?", needsImages: false),
-    SampleQuery(text: "What are the Premium Cold Cashier placement requirements?", needsImages: false),
+    SampleQuery(text: "What are the Suggested Retail Prices for 8.4oz, 12oz, 16oz, and 20oz Red Bull?", needsImages: false),
 ]
 
+// MARK: - Comparison queries
+private let comparisonQueries: [SampleQuery] = [
+    SampleQuery(text: "Compare Platinum, Diamond, and Double Diamond Groc: what are the 8.4 oz shelf discounts?", needsImages: false),
+    SampleQuery(text: "Compare Triple Diamond Conv vs Triple Diamond Groc shelf case costs for 8.4 oz and 12 oz.", needsImages: false),
+    SampleQuery(text: "Which tier has the lowest 8.4 oz case cost in the Shelf + Cold Cashier program?", needsImages: false),
+    SampleQuery(text: "How many Linear Feet does each Grocery tier require? List Platinum, Diamond, Double Diamond, Triple Diamond.", needsImages: false),
+]
+
+// MARK: - Policy & contract queries
+private let policyQueries: [SampleQuery] = [
+    SampleQuery(text: "What is the Strike Zone requirement for Red Bull shelf placement?", needsImages: false),
+    SampleQuery(text: "What are the EDLP price limits for 8.4oz, 12oz, and 16oz singles?", needsImages: false),
+    SampleQuery(text: "What are the Premium Cold Cashier placement requirements?", needsImages: false),
+    SampleQuery(text: "Is Red Bull North America Inc. a party to the VIP Opt-In Contract?", needsImages: false),
+    SampleQuery(text: "Until when is the 2025 VIP Opt-In Contract effective?", needsImages: false),
+    SampleQuery(text: "How many days notice is required to change participation level?", needsImages: false),
+    SampleQuery(text: "How many days does a party have to cure a material breach?", needsImages: false),
+    SampleQuery(text: "What size cold equipment is required for Premium Cold Cashier?", needsImages: false),
+]
+
+// MARK: - Image queries (evidence images from contracts)
 private let imageQueries: [SampleQuery] = [
-    SampleQuery(text: "Show the Platinum Liquor product assortment and list the 8.4 oz shelf discount and case cost.", needsImages: true),
-    SampleQuery(text: "Show Red Bull product images and explain the EDLP pricing limits for all sizes.", needsImages: true),
-    SampleQuery(text: "Show evidence images and compare Triple Diamond Groc vs Double Diamond Groc shelf case costs.", needsImages: true),
-    SampleQuery(text: "Show product images from the Platinum Liquor contract and list all required cooler SKU assortment.", needsImages: true),
+    SampleQuery(text: "Show product images from Platinum Liquor and list the 8.4 oz case cost.", needsImages: true),
+    SampleQuery(text: "Show evidence images and state the EDLP limits for 8.4oz and 12oz singles.", needsImages: true),
+    SampleQuery(text: "Show images from Double Diamond Groc and list the Shelf + Cold Cashier 8.4 oz case cost.", needsImages: true),
+    SampleQuery(text: "Show images from Triple Diamond Groc and state the 12 oz shelf case cost.", needsImages: true),
+    SampleQuery(text: "Show product images from Platinum Liquor and list the required cooler SKU assortment.", needsImages: true),
+    SampleQuery(text: "Show evidence images from Diamond Groc and explain the Suggested Retail Prices.", needsImages: true),
 ]
 
 struct ChatView: View {
@@ -87,6 +110,15 @@ struct ChatView: View {
                     }
                     .toggleStyle(.switch)
                     .controlSize(.small)
+
+                    Spacer()
+
+                    Button(action: { appState.clearChat() }) {
+                        Label("Clear", systemImage: "trash")
+                            .font(.caption)
+                    }
+                    .disabled(appState.messages.isEmpty || appState.isGenerating)
+                    .foregroundColor(.red)
                 }
                 .padding(.horizontal)
 
@@ -127,34 +159,11 @@ struct ChatView: View {
             .buttonStyle(.plain)
 
             if showSamples {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Text only")
-                        .font(.caption2.bold())
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal)
-
-                    FlowLayout(spacing: 6) {
-                        ForEach(textQueries) { q in
-                            SampleQueryButton(query: q, disabled: appState.isGenerating) {
-                                tappedQuery(q)
-                            }
-                        }
-                    }
-                    .padding(.horizontal)
-
-                    Text("With evidence images")
-                        .font(.caption2.bold())
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal)
-
-                    FlowLayout(spacing: 6) {
-                        ForEach(imageQueries) { q in
-                            SampleQueryButton(query: q, disabled: appState.isGenerating) {
-                                tappedQuery(q)
-                            }
-                        }
-                    }
-                    .padding(.horizontal)
+                VStack(alignment: .leading, spacing: 10) {
+                    querySection(title: "Pricing", queries: pricingQueries, color: .blue)
+                    querySection(title: "Comparisons", queries: comparisonQueries, color: .teal)
+                    querySection(title: "Policy & Contract", queries: policyQueries, color: .green)
+                    querySection(title: "With evidence images", queries: imageQueries, color: .purple)
                 }
                 .padding(.bottom, 12)
             }
@@ -162,6 +171,24 @@ struct ChatView: View {
         .background(Color(.systemGray6).opacity(0.5))
         .cornerRadius(8)
         .padding(.horizontal, 8)
+    }
+
+    private func querySection(title: String, queries: [SampleQuery], color: Color) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.caption2.bold())
+                .foregroundColor(color)
+                .padding(.horizontal)
+
+            FlowLayout(spacing: 6) {
+                ForEach(queries) { q in
+                    SampleQueryButton(query: q, color: color, disabled: appState.isGenerating) {
+                        tappedQuery(q)
+                    }
+                }
+            }
+            .padding(.horizontal)
+        }
     }
 
     private func tappedQuery(_ query: SampleQuery) {
@@ -185,6 +212,7 @@ struct ChatView: View {
 
 struct SampleQueryButton: View {
     let query: SampleQuery
+    var color: Color = .blue
     let disabled: Bool
     let action: () -> Void
 
@@ -200,12 +228,12 @@ struct SampleQueryButton: View {
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
-            .background(query.needsImages ? Color.purple.opacity(0.1) : Color.blue.opacity(0.1))
-            .foregroundColor(query.needsImages ? .purple : .blue)
+            .background(color.opacity(0.1))
+            .foregroundColor(color)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(query.needsImages ? Color.purple.opacity(0.3) : Color.blue.opacity(0.3), lineWidth: 1)
+                    .stroke(color.opacity(0.3), lineWidth: 1)
             )
         }
         .buttonStyle(.plain)

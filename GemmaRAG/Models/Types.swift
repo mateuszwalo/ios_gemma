@@ -126,14 +126,14 @@ enum ModelLoadState: Equatable {
 
 struct RAGConfig {
     var topK: Int = 5
-    var searchPoolK: Int = 20
+    var searchPoolK: Int = 15
     var rerankAlpha: Float = 0.65
     var sourceBoost: Float = 0.08
     var maxContextChars: Int = 4000
     var maxContextChunks: Int = 5
     var maxImages: Int = 2
-    var minRetrievalConfidence: Float = 0.15
-    var imageMinConfidence: Float = 0.20
+    var minRetrievalConfidence: Float = 0.10
+    var imageMinConfidence: Float = 0.15
     var minImageOcrMatch: Float = 0.0
     var nCtx: Int = 4096
     var nThreads: Int = 4

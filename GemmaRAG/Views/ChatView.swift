@@ -7,22 +7,22 @@ struct SampleQuery: Identifiable {
 }
 
 private let textQueries: [SampleQuery] = [
-    SampleQuery(text: "In RBDC Platinum Groc - Static, what are the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz?", needsImages: false),
-    SampleQuery(text: "What are the EDLP limits for 8.4oz, 12oz, and 16oz singles according to the 2025 VIP Opt-In contracts?", needsImages: false),
+    SampleQuery(text: "What are the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz in RBDC Platinum Groc?", needsImages: false),
+    SampleQuery(text: "What are the EDLP price limits for 8.4oz, 12oz, and 16oz singles?", needsImages: false),
     SampleQuery(text: "What is the Strike Zone requirement for Red Bull shelf placement?", needsImages: false),
-    SampleQuery(text: "Is Red Bull North America a party to the VIP Opt-In Contract?", needsImages: false),
-    SampleQuery(text: "Tell me about the recommended Red Bull Platinum Groc shelf layout and explain it briefly", needsImages: false),
-    SampleQuery(text: "Compare Platinum, Diamond, and Triple Diamond: what are the 8.4 oz and 12 oz case costs in the Shelf Program?", needsImages: false),
-    SampleQuery(text: "In RBDC Trpl Diamond Groc - Static, what are the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz?", needsImages: false),
+    SampleQuery(text: "Is Red Bull North America Inc. a party to the VIP Opt-In Contract?", needsImages: false),
+    SampleQuery(text: "Compare Platinum, Diamond, and Double Diamond: what are the 8.4 oz shelf discounts and case costs?", needsImages: false),
+    SampleQuery(text: "What are the Suggested Retail Prices for 8.4oz, 12oz, 16oz, and 20oz?", needsImages: false),
+    SampleQuery(text: "In Triple Diamond Conv, what are the three pricing tiers and their 8.4 oz case costs?", needsImages: false),
+    SampleQuery(text: "What is the 16 oz EDLP Case Discount and resulting Case Cost?", needsImages: false),
+    SampleQuery(text: "What are the Premium Cold Cashier placement requirements?", needsImages: false),
 ]
 
 private let imageQueries: [SampleQuery] = [
-    SampleQuery(text: "Show one evidence image from RBDC Platinum Groc - Static and state the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz.", needsImages: true),
-    SampleQuery(text: "Show one evidence image from RBDC Diamond Groc - Static and list the Suggested Retail Prices for 8.4oz and 12oz singles.", needsImages: true),
-    SampleQuery(text: "Show one evidence image from RBDC Platinum Liquor - Static and state the 8.4 oz shelf discount and case cost.", needsImages: true),
-    SampleQuery(text: "Show an image from the contract page where the EDLP limits (2/$5, 2/$6, 2/$8) are visible and explain them briefly.", needsImages: true),
-    SampleQuery(text: "Show a picture from the Diamond or Triple Diamond contract where the Strike Zone (4-6 ft from ground) is stated and summarize the requirement.", needsImages: true),
-    SampleQuery(text: "Based on the documents, show a visual example of premium cold cashier placement for Red Bull.", needsImages: true),
+    SampleQuery(text: "Show the Platinum Liquor product assortment and list the 8.4 oz shelf discount and case cost.", needsImages: true),
+    SampleQuery(text: "Show Red Bull product images and explain the EDLP pricing limits for all sizes.", needsImages: true),
+    SampleQuery(text: "Show evidence images and compare Triple Diamond Groc vs Double Diamond Groc shelf case costs.", needsImages: true),
+    SampleQuery(text: "Show product images from the Platinum Liquor contract and list all required cooler SKU assortment.", needsImages: true),
 ]
 
 struct ChatView: View {

@@ -147,23 +147,37 @@ class AppState: ObservableObject {
         }
 
         let markers = [
-            "<start_of_turn>", "<end_of_turn>",
             "<start_of_turn>model", "<start_of_turn>user",
-            "<|turn>", "<turn|>", "<|turn>model", "<|turn>user",
+            "<start_of_turn>", "<end_of_turn>",
+            "</start_of_turn>", "</end_of_turn>",
+            "<|turn>model", "<|turn>user",
+            "<|turn>", "<turn|>",
             "<|tool_call>", "</think>", "<think>",
-            "model\n",
+            "<bos>", "<eos>", "<pad>",
         ]
         for marker in markers {
             result = result.replacingOccurrences(of: marker, with: "")
         }
 
+        let regex = try? NSRegularExpression(pattern: "<[/]?(?:start_of_turn|end_of_turn|turn|think|bos|eos)[^>]*>", options: [])
+        if let regex = regex {
+            result = regex.stringByReplacingMatches(in: result, range: NSRange(result.startIndex..., in: result), withTemplate: "")
+        }
+
         result = result.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if result.hasPrefix("_response>") || result.hasPrefix("_turn>") {
+        if result.hasPrefix("model\n") {
+            result = String(result.dropFirst(6)).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        if result.hasPrefix("model") && (result.count == 5 || result[result.index(result.startIndex, offsetBy: 5)].isWhitespace) {
+            result = String(result.dropFirst(5)).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+
+        while result.hasPrefix("_response>") || result.hasPrefix("_turn>") || result.hasPrefix("_of_turn>") {
             if let idx = result.firstIndex(of: ">") {
                 result = String(result[result.index(after: idx)...])
                     .trimmingCharacters(in: .whitespacesAndNewlines)
-            }
+            } else { break }
         }
 
         return result

@@ -124,6 +124,7 @@ class LlamaRunner: ObservableObject {
         }
 
         let maxGenTokens = config.maxTokens
+        let contextSize = Int32(config.nCtx)
         let useSampler = activeSampler
 
         return try await Task.detached(priority: .userInitiated) { [retrySampler] in
@@ -145,7 +146,7 @@ class LlamaRunner: ObservableObject {
             guard nPromptTokens > 0 else {
                 throw LlamaError.tokenizationFailed
             }
-            let safeLimit = batchSize - Int32(maxGenTokens) - 16
+            let safeLimit = contextSize - Int32(maxGenTokens) - 16
             let effectivePromptTokens = min(nPromptTokens, safeLimit)
             tokens = Array(tokens.prefix(Int(effectivePromptTokens)))
 

@@ -123,6 +123,8 @@ class RAGPipeline {
         var selectedSourceFiles: Set<String> = []
 
         for (rank, item) in selectedItems.enumerated() {
+            if item.chunk.text.count < 200 { continue }
+
             var chunkText = item.chunk.text
             var sourceInfo = "[Source: \(item.chunk.sourceFile)"
             if let page = item.chunk.pageNumber {

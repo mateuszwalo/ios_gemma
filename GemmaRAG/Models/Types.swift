@@ -126,8 +126,8 @@ enum ModelLoadState: Equatable {
 // MARK: - RAG Config (mirrors base.yaml RAG section)
 
 struct RAGConfig {
-    var topK: Int = 5
-    var searchPoolK: Int = 15
+    var topK: Int = 6
+    var searchPoolK: Int = 20
     var rerankAlpha: Float = 0.65
     var sourceBoost: Float = 0.08
     var maxContextChars: Int = 4000

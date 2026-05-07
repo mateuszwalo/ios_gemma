@@ -16,6 +16,10 @@ private let pricingQueries: [SampleQuery] = [
     SampleQuery(text: "In Platinum Liquor, what is the 8.4 oz Shelf Discount and Case Cost?", needsImages: false),
     SampleQuery(text: "What is the 16 oz EDLP Case Discount and resulting Case Cost?", needsImages: false),
     SampleQuery(text: "What are the Suggested Retail Prices for 8.4oz, 12oz, 16oz, and 20oz Red Bull?", needsImages: false),
+    SampleQuery(text: "In Diamond Conv, what is the 12 oz Shelf case cost?", needsImages: false),
+    SampleQuery(text: "In Double Diamond Conv, what are the Cold Cashier discounts for 8.4 oz and 12 oz?", needsImages: false),
+    SampleQuery(text: "What is the 20 oz EDLP Case Discount?", needsImages: false),
+    SampleQuery(text: "In Platinum Groc, what is the 12 oz Shelf + Cold Cashier case cost?", needsImages: false),
 ]
 
 // MARK: - Comparison queries
@@ -24,6 +28,10 @@ private let comparisonQueries: [SampleQuery] = [
     SampleQuery(text: "Compare Triple Diamond Conv vs Triple Diamond Groc shelf case costs for 8.4 oz and 12 oz.", needsImages: false),
     SampleQuery(text: "Which tier has the lowest 8.4 oz case cost in the Shelf + Cold Cashier program?", needsImages: false),
     SampleQuery(text: "How many Linear Feet does each Grocery tier require? List Platinum, Diamond, Double Diamond, Triple Diamond.", needsImages: false),
+    SampleQuery(text: "Compare Diamond Groc vs Diamond Conv: which gives a bigger 8.4 oz shelf discount?", needsImages: false),
+    SampleQuery(text: "Which is cheaper per case: Platinum Groc Shelf 8.4 oz or Platinum Liquor Shelf 8.4 oz?", needsImages: false),
+    SampleQuery(text: "Rank all Grocery tiers by 12 oz Shelf case cost from cheapest to most expensive.", needsImages: false),
+    SampleQuery(text: "How do Cold Cashier requirements differ between Convenience and Grocery tiers?", needsImages: false),
 ]
 
 // MARK: - Policy & contract queries
@@ -36,6 +44,10 @@ private let policyQueries: [SampleQuery] = [
     SampleQuery(text: "How many days notice is required to change participation level?", needsImages: false),
     SampleQuery(text: "How many days does a party have to cure a material breach?", needsImages: false),
     SampleQuery(text: "What size cold equipment is required for Premium Cold Cashier?", needsImages: false),
+    SampleQuery(text: "What is the minimum case purchase requirement for Triple Diamond?", needsImages: false),
+    SampleQuery(text: "What happens if a retailer fails to meet shelf standards during an audit?", needsImages: false),
+    SampleQuery(text: "Can a retailer participate in multiple tiers simultaneously?", needsImages: false),
+    SampleQuery(text: "What are the required SKU assortments for Platinum Liquor coolers?", needsImages: false),
 ]
 
 // MARK: - Image queries (evidence images from contracts)
@@ -46,6 +58,10 @@ private let imageQueries: [SampleQuery] = [
     SampleQuery(text: "Show images from Triple Diamond Groc and state the 12 oz shelf case cost.", needsImages: true),
     SampleQuery(text: "Show product images from Platinum Liquor and list the required cooler SKU assortment.", needsImages: true),
     SampleQuery(text: "Show evidence images from Diamond Groc and explain the Suggested Retail Prices.", needsImages: true),
+    SampleQuery(text: "Show images from Diamond Conv and list all 8.4 oz discount tiers.", needsImages: true),
+    SampleQuery(text: "Show evidence images for Strike Zone shelf placement requirements.", needsImages: true),
+    SampleQuery(text: "Show images from Triple Diamond Conv and list Cold Cashier case costs.", needsImages: true),
+    SampleQuery(text: "Show contract images and explain the Premium Cold Cashier equipment requirements.", needsImages: true),
 ]
 
 struct ChatView: View {

@@ -1,0 +1,2532 @@
+{
+  "deviceInfo" : {
+    "model" : "iPad16,4",
+    "physicalMemoryGB" : 7.2885437,
+    "processorCount" : 9,
+    "systemName" : "iPadOS",
+    "systemVersion" : "Version 18.4 (Build 22E240)",
+    "thermalState" : "nominal"
+  },
+  "ragConfig" : {
+    "maxContextChars" : 4000,
+    "maxContextChunks" : 5,
+    "maxImages" : 2,
+    "maxTokens" : 512,
+    "nCtx" : 4096,
+    "nGpuLayers" : 99,
+    "rerankAlpha" : 0.65,
+    "searchPoolK" : 15,
+    "temperature" : 0.3,
+    "topK" : 5,
+    "topKSampling" : 40,
+    "topP" : 0.9
+  },
+  "reportId" : "2026-05-07T08-06-51Z",
+  "resultsTextOnly" : [
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7449856,
+      "expectedAnswer" : "8.4 oz shelf discount is -$3.50 and case cost is $38.50.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.25,
+      "modelAnswer" : "The 8.4 oz Case Cost for the Diamond (12 Linear Feet) contract is $38.50. The Shelf Discount is -$3.50.",
+      "promptTokens" : 1561,
+      "question" : "In the Diamond (12 Linear Feet) contract, what are the 8.4 oz shelf discount and case cost?",
+      "questionId" : "q001",
+      "relevantChunkIds" : [
+        "1b935a40e0ef"
+      ],
+      "retrievalConfidence" : 0.7790909,
+      "retrievalTimeMs" : 1.0479689,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 44,
+      "tokensPerSecond" : 49.131714,
+      "totalTimeMs" : 3257.448,
+      "ttftMs" : 2358.989
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6499758,
+      "expectedAnswer" : "The 12 oz case cost under Shelf + Cold Cashier Discount is $48.95.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.3438,
+      "modelAnswer" : "",
+      "promptTokens" : 1518,
+      "question" : "In the Diamond contract, what is the 12 oz case cost under Shelf + Cold Cashier Discount?",
+      "questionId" : "q002",
+      "relevantChunkIds" : [
+        "1b935a40e0ef"
+      ],
+      "retrievalConfidence" : 0.765,
+      "retrievalTimeMs" : 1.0319948,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 0,
+      "tokensPerSecond" : 0,
+      "totalTimeMs" : 2294.9321,
+      "ttftMs" : 2292.125
+    },
+    {
+      "category" : "standards",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7359257,
+      "expectedAnswer" : "Platinum Groc is defined as 4 Linear Feet.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.5,
+      "modelAnswer" : "PLATINUM (4 Linear Feet)",
+      "promptTokens" : 1314,
+      "question" : "In the Platinum Groc contract, how much shelf space is defined for the program?",
+      "questionId" : "q003",
+      "relevantChunkIds" : [
+        "e2b870e91444"
+      ],
+      "retrievalConfidence" : 0.59000003,
+      "retrievalTimeMs" : 1.0780096,
+      "retrievedChunkIds" : [
+        "293442e5758b",
+        "814f4d607f3c",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 16,
+      "tokensPerSecond" : 48.479115,
+      "totalTimeMs" : 2342.31,
+      "ttftMs" : 2009.3451
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6789436,
+      "expectedAnswer" : "The 8.4 oz case cost under Shelf + Cold Cashier Discount is $35.75.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.5312,
+      "modelAnswer" : "The 8.4 oz Case Cost under Shelf + Cold Cashier Discount in Double Diamond Groc is $35.75.",
+      "promptTokens" : 1435,
+      "question" : "In Double Diamond Groc, what is the 8.4 oz case cost under Shelf + Cold Cashier Discount?",
+      "questionId" : "q004",
+      "relevantChunkIds" : [
+        "aba18b109de4"
+      ],
+      "retrievalConfidence" : 0.7275,
+      "retrievalTimeMs" : 1.0660887,
+      "retrievedChunkIds" : [
+        "aba18b109de4",
+        "a826b714efc2",
+        "1b935a40e0ef"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 36,
+      "tokensPerSecond" : 48.72944,
+      "totalTimeMs" : 2924.728,
+      "ttftMs" : 2183.113
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6959906,
+      "expectedAnswer" : "The 12 oz case cost under Shelf + Cold Cashier Discount is $48.20.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.5625,
+      "modelAnswer" : "$48.20",
+      "promptTokens" : 1525,
+      "question" : "In Triple Diamond Groc (16 Linear Feet), what is the 12 oz case cost under Shelf + Cold Cashier Discount?",
+      "questionId" : "q005",
+      "relevantChunkIds" : [
+        "ee6ff127e609"
+      ],
+      "retrievalConfidence" : 0.7573779,
+      "retrievalTimeMs" : 1.0740757,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "1b935a40e0ef",
+        "aba18b109de4",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 13,
+      "tokensPerSecond" : 47.975098,
+      "totalTimeMs" : 2625.456,
+      "ttftMs" : 2351.624
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.6219616,
+      "expectedAnswer" : "The 12 oz case cost under S.P. + P.C.C. + A.C. Discount is $47.95.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.7656,
+      "modelAnswer" : "$47.95",
+      "promptTokens" : 1438,
+      "question" : "In Triple Diamond Conv (7 Shelves), what is the 12 oz case cost under S.P. + P.C.C. + A.C. Discount?",
+      "questionId" : "q006",
+      "relevantChunkIds" : [
+        "a79ce7f506c2"
+      ],
+      "retrievalConfidence" : 0.71727276,
+      "retrievalTimeMs" : 1.019001,
+      "retrievedChunkIds" : [
+        "a79ce7f506c2",
+        "ee6ff127e609",
+        "ce95333f51d2",
+        "1b935a40e0ef"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 13,
+      "tokensPerSecond" : 48.740982,
+      "totalTimeMs" : 2498.737,
+      "ttftMs" : 2229.288
+    },
+    {
+      "category" : "placement",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6109943,
+      "expectedAnswer" : "Red Bull must be placed in the Strike Zone, 4-6 ft. from the ground.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.875,
+      "modelAnswer" : "Ensure Red Bull is placed in the Strike Zone (4-6 ft. from ground)",
+      "promptTokens" : 1547,
+      "question" : "What strike zone placement standard is required for Red Bull?",
+      "questionId" : "q007",
+      "relevantChunkIds" : [
+        "e2b870e91444"
+      ],
+      "retrievalConfidence" : 0.5955085,
+      "retrievalTimeMs" : 0.97608566,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 24,
+      "tokensPerSecond" : 48.307236,
+      "totalTimeMs" : 2956.44,
+      "ttftMs" : 2456.944
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6139746,
+      "expectedAnswer" : "EDLP limits are: 8.4oz at no more than 2\/$5, 12oz at no more than 2\/$6, and 16oz at no more than 2\/$8.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.9531,
+      "modelAnswer" : "The EDLP limits specified are:\n* 8.4oz singles: no more than 2\/$5\n* 12oz singles: no more than 2\/$6\n* 16oz singles: no more than 2\/$8",
+      "promptTokens" : 1561,
+      "question" : "What EDLP limits are specified for 8.4oz, 12oz, and 16oz singles?",
+      "questionId" : "q008",
+      "relevantChunkIds" : [
+        "aba18b109de4"
+      ],
+      "retrievalConfidence" : 0.7075614,
+      "retrievalTimeMs" : 0.9920597,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 53,
+      "tokensPerSecond" : 48.719597,
+      "totalTimeMs" : 3566.319,
+      "ttftMs" : 2475.749
+    },
+    {
+      "category" : "placement",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.652956,
+      "expectedAnswer" : "Cold Red Bull should be placed within 8 feet of the register line.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3240.9688,
+      "modelAnswer" : "Yes, I will opt into Premium Cold Cashier and place cold Red Bull within 8 feet of the register line",
+      "promptTokens" : 1554,
+      "question" : "Under Premium Cold Cashier, how close to the register line should cold Red Bull be placed?",
+      "questionId" : "q009",
+      "relevantChunkIds" : [
+        "ee6ff127e609"
+      ],
+      "retrievalConfidence" : 0.6977169,
+      "retrievalTimeMs" : 1.011014,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 30,
+      "tokensPerSecond" : 48.07353,
+      "totalTimeMs" : 3122.036,
+      "ttftMs" : 2495.2468
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6430616,
+      "expectedAnswer" : "Premium cold equipment must hold 3+ cases.",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.0938,
+      "modelAnswer" : "Based on the context provided, the capacity required for premium cold equipment under the premium cold cashier (standard shelf program) is not specified. The context mentions options for different case sizes (8.4 oz, 12 oz, 16 oz, 20 oz) and associated costs, but does not state a required capacity for the equipment.",
+      "promptTokens" : 1266,
+      "question" : "Under Premium Cold Cashier (standard shelf program), what capacity must premium cold equipment hold?",
+      "questionId" : "q010",
+      "relevantChunkIds" : [
+        "aba18b109de4"
+      ],
+      "retrievalConfidence" : 0.63355064,
+      "retrievalTimeMs" : 1.0119677,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 79,
+      "tokensPerSecond" : 49.6716,
+      "totalTimeMs" : 3618.551,
+      "ttftMs" : 2025.357
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.617074,
+      "expectedAnswer" : "No, Red Bull barrels or other equipment are not eligible for discount.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.4062,
+      "modelAnswer" : "Red Bull barrels or other equipment are not eligible for discount.",
+      "promptTokens" : 1373,
+      "question" : "In Triple Diamond Conv additional cooler terms, are Red Bull barrels eligible for discount?",
+      "questionId" : "q011",
+      "relevantChunkIds" : [
+        "f384c6d6761f"
+      ],
+      "retrievalConfidence" : 0.70259255,
+      "retrievalTimeMs" : 1.0049343,
+      "retrievedChunkIds" : [
+        "f384c6d6761f",
+        "a79ce7f506c2",
+        "ce95333f51d2",
+        "ee6ff127e609"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 20,
+      "tokensPerSecond" : 48.330536,
+      "totalTimeMs" : 2609.438,
+      "ttftMs" : 2192.92
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.6011,
+      "expectedAnswer" : "The additional cooler must hold 2+ cases and be placed in a high foot traffic area of the store.",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.5156,
+      "modelAnswer" : "Based on the context provided, the cooler options listed under \"Cooler Options\" are Platinum, Diamond, and Triple Diamond.",
+      "promptTokens" : 1256,
+      "question" : "In Triple Diamond Conv additional cooler terms, what are the cooler placement requirements?",
+      "questionId" : "q012",
+      "relevantChunkIds" : [
+        "f384c6d6761f"
+      ],
+      "retrievalConfidence" : 0.64000005,
+      "retrievalTimeMs" : 1.0869503,
+      "retrievedChunkIds" : [
+        "ce95333f51d2",
+        "b59c318c253b",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 33,
+      "tokensPerSecond" : 50.64076,
+      "totalTimeMs" : 2689.008,
+      "ttftMs" : 2034.581
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6299486,
+      "expectedAnswer" : "Suggested retail prices are: 8.4oz $2.69, 12oz $3.59, 16oz $4.39, and 20oz $5.39.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.5469,
+      "modelAnswer" : "The suggested retail prices listed are:\n8.4oz: $2.69\n12oz: $3.59\n16oz: $4.39\n20oz: $5.39",
+      "promptTokens" : 1566,
+      "question" : "What suggested retail prices are listed for 8.4oz, 12oz, 16oz, and 20oz singles?",
+      "questionId" : "q013",
+      "relevantChunkIds" : [
+        "1b935a40e0ef"
+      ],
+      "retrievalConfidence" : 0.73006576,
+      "retrievalTimeMs" : 1.0080338,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 48,
+      "tokensPerSecond" : 48.46933,
+      "totalTimeMs" : 3530.5051,
+      "ttftMs" : 2537.465
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.5859604,
+      "expectedAnswer" : "In Platinum Liquor, the 8.4 oz shelf discount is -$4.75 and case cost is $37.25.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.9375,
+      "modelAnswer" : "The 8.4 oz Case Cost in Platinum Liquor is $37.25. The shelf discount for 8.4oz singles is no more than 2\/$5.",
+      "promptTokens" : 1477,
+      "question" : "In Platinum Liquor, what are the 8.4 oz shelf discount and case cost?",
+      "questionId" : "q014",
+      "relevantChunkIds" : [
+        "049f372a13a7"
+      ],
+      "retrievalConfidence" : 0.78375,
+      "retrievalTimeMs" : 0.9880066,
+      "retrievedChunkIds" : [
+        "049f372a13a7",
+        "0d289b730c5b",
+        "e2b870e91444",
+        "293442e5758b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 38,
+      "tokensPerSecond" : 46.102177,
+      "totalTimeMs" : 3254.113,
+      "ttftMs" : 2427.192
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.644969,
+      "expectedAnswer" : "The 16 oz EDLP case discount is -$2.00 and case cost is $33.11.",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.9688,
+      "modelAnswer" : "The 16 oz EDLP details state: \"Opt in for additional $1 OFF VIP Case Cost\".",
+      "promptTokens" : 1354,
+      "question" : "What are the 16 oz EDLP case discount and case cost in the contract details?",
+      "questionId" : "q015",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.79,
+      "retrievalTimeMs" : 1.0399818,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "814f4d607f3c",
+        "a826b714efc2"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 29,
+      "tokensPerSecond" : 40.70764,
+      "totalTimeMs" : 3790.051,
+      "ttftMs" : 3074.875
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7969608,
+      "expectedAnswer" : "The agreement continues until December 31, 2025, unless terminated earlier.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.375,
+      "modelAnswer" : "until December 31, 2025, unless earlier terminated by Distributor or Account as provided herein.",
+      "promptTokens" : 1187,
+      "question" : "Until what date does the agreement continue unless terminated earlier?",
+      "questionId" : "q016",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.7075,
+      "retrievalTimeMs" : 1.3010502,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 23,
+      "tokensPerSecond" : 40.70062,
+      "totalTimeMs" : 3217.558,
+      "ttftMs" : 2649.224
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6570091,
+      "expectedAnswer" : "Changing participation level requires no less than 30 days' prior written notice.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.4688,
+      "modelAnswer" : "NO LESS THAN 30 DAYS’ PRIOR WRITTEN NOTICE is required to change its participation level.",
+      "promptTokens" : 1188,
+      "question" : "How much prior written notice is required to change participation level?",
+      "questionId" : "q017",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.66999996,
+      "retrievalTimeMs" : 1.1870861,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 21,
+      "tokensPerSecond" : 41.124535,
+      "totalTimeMs" : 3112.931,
+      "ttftMs" : 2599.347
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7420053,
+      "expectedAnswer" : "The cure period is within three (3) days after receipt of written notice of default.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.6562,
+      "modelAnswer" : "EITHER PARTY MAY IMMEDIATELY TERMINATE THIS AGREEMENT IF THE OTHER PARTY FAILS TO CURE A MATERIAL BREACH OF THIS AGREEMENT WITHIN THREE (3) DAYS AFTER RECEIPT OF WRITTEN NOTICE OF DEFAULT.",
+      "promptTokens" : 1191,
+      "question" : "What is the cure period for a material breach after written notice of default?",
+      "questionId" : "q018",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.71999997,
+      "retrievalTimeMs" : 1.2600422,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 46,
+      "tokensPerSecond" : 43.462856,
+      "totalTimeMs" : 3651.269,
+      "ttftMs" : 2589.792
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6759634,
+      "expectedAnswer" : "No. The agreement states that Red Bull North America, Inc. is not a party to this agreement.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.6719,
+      "modelAnswer" : "Account acknowledges that Red Bull North America, Inc. is not a party to this agreement.",
+      "promptTokens" : 1263,
+      "question" : "Is Red Bull North America, Inc. a party to this agreement?",
+      "questionId" : "q019",
+      "relevantChunkIds" : [
+        "b59c318c253b"
+      ],
+      "retrievalConfidence" : 0.82068473,
+      "retrievalTimeMs" : 1.2500286,
+      "retrievedChunkIds" : [
+        "a826b714efc2",
+        "814f4d607f3c",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 26,
+      "tokensPerSecond" : 41.160206,
+      "totalTimeMs" : 3480.363,
+      "ttftMs" : 2845.666
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.8290281,
+      "expectedAnswer" : "The account agrees to buy a minimum of 15 cases and no more than 30 cases.",
+      "hitAtK" : true,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.6875,
+      "modelAnswer" : "Agree to buy a minimum of 15 cases but no more than 30 cases",
+      "promptTokens" : 1265,
+      "question" : "What minimum and maximum purchase case count is required in the EDLP details section?",
+      "questionId" : "q020",
+      "relevantChunkIds" : [
+        "b59c318c253b"
+      ],
+      "retrievalConfidence" : 0.5502077,
+      "retrievalTimeMs" : 1.109004,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 26,
+      "tokensPerSecond" : 41.77445,
+      "totalTimeMs" : 3361.822,
+      "ttftMs" : 2736.388
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.767993,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.7188,
+      "modelAnswer" : "The 8.4 oz case cost is $2.25 and the shelf discount is $39.75.",
+      "promptTokens" : 1351,
+      "question" : "In Platinum Groc, what is the 8.4 oz Shelf Discount and Case Cost?",
+      "questionId" : "ui_p01",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7275,
+      "retrievalTimeMs" : 1.2490749,
+      "retrievedChunkIds" : [
+        "e2b870e91444",
+        "293442e5758b",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 34,
+      "tokensPerSecond" : 42.690716,
+      "totalTimeMs" : 3731.456,
+      "ttftMs" : 2931.925
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7520189,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.7188,
+      "modelAnswer" : "The case costs for 8.4 oz and 12 oz in diamond groc are $42.00 and $54.70, respectively.",
+      "promptTokens" : 1275,
+      "question" : "In Diamond Groc, what are the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz?",
+      "questionId" : "ui_p02",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.70602214,
+      "retrievalTimeMs" : 1.0800362,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 43,
+      "tokensPerSecond" : 43.420612,
+      "totalTimeMs" : 3748.25,
+      "ttftMs" : 2754.99
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.8589497,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.7031,
+      "modelAnswer" : "The 8.4 oz shelf + cold cashier discount and case cost in Double Diamond Groc are:\nShelf Discount: -$6.25 for the 8.4 oz Case Cost of $35.75 for the 12 oz Case Cost.",
+      "promptTokens" : 1435,
+      "question" : "In Double Diamond Groc, what is the 8.4 oz Shelf + Cold Cashier Discount and Case Cost?",
+      "questionId" : "ui_p03",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7581818,
+      "retrievalTimeMs" : 1.1730194,
+      "retrievedChunkIds" : [
+        "aba18b109de4",
+        "a826b714efc2",
+        "1b935a40e0ef"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 63,
+      "tokensPerSecond" : 44.081993,
+      "totalTimeMs" : 4587.056,
+      "ttftMs" : 3154.771
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7470121,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3243.7031,
+      "modelAnswer" : "The shelf program case costs for 8.4 oz are -$4.25 and $37.75. The shelf program case costs for 12 oz are $50.45 and $48.20.",
+      "promptTokens" : 1361,
+      "question" : "In Triple Diamond Groc, what are the Shelf Program case costs for 8.4 oz and 12 oz?",
+      "questionId" : "ui_p04",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7183838,
+      "retrievalTimeMs" : 1.0870695,
+      "retrievedChunkIds" : [
+        "b59c318c253b",
+        "ee6ff127e609",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 50,
+      "tokensPerSecond" : 43.400326,
+      "totalTimeMs" : 4286.158,
+      "ttftMs" : 3131.158
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7629862,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.8438,
+      "modelAnswer" : "The case costs for the 16 oz EDLP in the Triple Diamond Conv are: $42.00, $54.70, $36.11, and $43.23.",
+      "promptTokens" : 1263,
+      "question" : "In Triple Diamond Conv, what are the three discount tiers and 8.4 oz case costs for each?",
+      "questionId" : "ui_p05",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6354546,
+      "retrievalTimeMs" : 1.210928,
+      "retrievedChunkIds" : [
+        "ce95333f51d2",
+        "b59c318c253b",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 47,
+      "tokensPerSecond" : 43.40169,
+      "totalTimeMs" : 3933.386,
+      "ttftMs" : 2847.419
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7210245,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.875,
+      "modelAnswer" : "The 8.4 oz Case Cost in Platinum Liquor is $37.25. The shelf discount for 8.4oz singles is no more than 2\/$5.",
+      "promptTokens" : 1477,
+      "question" : "In Platinum Liquor, what is the 8.4 oz Shelf Discount and Case Cost?",
+      "questionId" : "ui_p06",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.78375,
+      "retrievalTimeMs" : 1.0809898,
+      "retrievedChunkIds" : [
+        "049f372a13a7",
+        "0d289b730c5b",
+        "e2b870e91444",
+        "293442e5758b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 38,
+      "tokensPerSecond" : 42.996204,
+      "totalTimeMs" : 4200.294,
+      "ttftMs" : 3313.602
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7240047,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.8906,
+      "modelAnswer" : "The 16 oz EDLP case discount is -$2.00 and the resulting case cost is $33.11.",
+      "promptTokens" : 1192,
+      "question" : "What is the 16 oz EDLP Case Discount and resulting Case Cost?",
+      "questionId" : "ui_p07",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7075,
+      "retrievalTimeMs" : 1.2509823,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 28,
+      "tokensPerSecond" : 41.59128,
+      "totalTimeMs" : 3317.38,
+      "ttftMs" : 2641.092
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7729998,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.8906,
+      "modelAnswer" : "The suggested retail prices are:\n8.4oz: $2.69\n12oz: $3.59\n16oz: $4.39\n20oz: $5.39",
+      "promptTokens" : 1567,
+      "question" : "What are the Suggested Retail Prices for 8.4oz, 12oz, 16oz, and 20oz Red Bull?",
+      "questionId" : "ui_p08",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.77520573,
+      "retrievalTimeMs" : 1.0720491,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 47,
+      "tokensPerSecond" : 43.78753,
+      "totalTimeMs" : 4481.58,
+      "ttftMs" : 3405.2659
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7499924,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.9375,
+      "modelAnswer" : "Based on the context provided, the 8.4 oz shelf discounts are listed under the \"Case Cost before Program Discounts\" for different product sizes, but the context does not explicitly compare the discounts across \"Platinum,\" \"Diamond,\" and \"Double Diamond Groc.\"\n\nFor the 16 oz EDLP details, the context states: \"Opt in for additional $ 1 OFF VIP Case Cost.\"",
+      "promptTokens" : 1279,
+      "question" : "Compare Platinum, Diamond, and Double Diamond Groc: what are the 8.4 oz shelf discounts?",
+      "questionId" : "ui_c01",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.66999996,
+      "retrievalTimeMs" : 1.2350082,
+      "retrievedChunkIds" : [
+        "a826b714efc2",
+        "814f4d607f3c",
+        "ce95333f51d2"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 81,
+      "tokensPerSecond" : 44.07168,
+      "totalTimeMs" : 4690.405,
+      "ttftMs" : 2849.418
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7920732,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.9688,
+      "modelAnswer" : "The case costs for 8.4 oz are:\nTriple Diamond Groc: $37.75\nTriple Diamond Conv: $35.50\n\nThe case costs for 12 oz are:\nTriple Diamond Groc: $48.20\nTriple Diamond Conv: $48.20",
+      "promptTokens" : 1317,
+      "question" : "Compare Triple Diamond Conv vs Triple Diamond Groc shelf case costs for 8.4 oz and 12 oz.",
+      "questionId" : "ui_c02",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6456579,
+      "retrievalTimeMs" : 1.1030436,
+      "retrievedChunkIds" : [
+        "b59c318c253b",
+        "ce95333f51d2",
+        "ee6ff127e609"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 68,
+      "tokensPerSecond" : 44.014484,
+      "totalTimeMs" : 4656.133,
+      "ttftMs" : 3108.1821
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7719269,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3241.9844,
+      "modelAnswer" : "The 8.4 oz case cost for the \"Shelf Program & EDLP\" option is $42.00. The 16 oz EDLP Details opt-in offers an additional $1 OFF VIP Case Cost.",
+      "promptTokens" : 1269,
+      "question" : "Which tier has the lowest 8.4 oz case cost in the Shelf + Cold Cashier program?",
+      "questionId" : "ui_c03",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.73031616,
+      "retrievalTimeMs" : 1.101017,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 47,
+      "tokensPerSecond" : 43.159855,
+      "totalTimeMs" : 4022.108,
+      "ttftMs" : 2930.168
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7930269,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.0156,
+      "modelAnswer" : "Based on the provided context, there is no information regarding the linear feet required for each grocery tier.",
+      "promptTokens" : 1279,
+      "question" : "How many Linear Feet does each Grocery tier require? List Platinum, Diamond, Double Diamond, Triple Diamond.",
+      "questionId" : "ui_c04",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.5783985,
+      "retrievalTimeMs" : 1.1280775,
+      "retrievedChunkIds" : [
+        "a826b714efc2",
+        "b59c318c253b",
+        "ce95333f51d2"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 28,
+      "tokensPerSecond" : 41.659473,
+      "totalTimeMs" : 3500.205,
+      "ttftMs" : 2825.0671
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7399788,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.0938,
+      "modelAnswer" : "Ensure Red Bull is placed in the Strike Zone (4-6 ft. from ground)",
+      "promptTokens" : 1548,
+      "question" : "What is the Strike Zone requirement for Red Bull shelf placement?",
+      "questionId" : "ui_po1",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6518393,
+      "retrievalTimeMs" : 1.0659695,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 26,
+      "tokensPerSecond" : 42.478664,
+      "totalTimeMs" : 4021.0251,
+      "ttftMs" : 3406.063
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7160177,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.0938,
+      "modelAnswer" : "The EDLP price limits are:\n* 8.4oz singles: no more than 2\/$5\n* 12oz singles: no more than 2\/$6\n* 16oz singles: no more than 2\/$8",
+      "promptTokens" : 1562,
+      "question" : "What are the EDLP price limits for 8.4oz, 12oz, and 16oz singles?",
+      "questionId" : "ui_po2",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6512826,
+      "retrievalTimeMs" : 1.067996,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 53,
+      "tokensPerSecond" : 43.86553,
+      "totalTimeMs" : 4609.564,
+      "ttftMs" : 3398.441
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.6820431,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.1094,
+      "modelAnswer" : "The Premium Cold Cashier option is listed as \"No\" under the \"Premium Cold Cashier\" section for both the 2025 VIP OPT-IN CONTRACT and the Double Diamond Grocery Shelf Program, EDLP & Premium Cold Cashier Shelf Program & EDLP.",
+      "promptTokens" : 1258,
+      "question" : "What are the Premium Cold Cashier placement requirements?",
+      "questionId" : "ui_po3",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6713746,
+      "retrievalTimeMs" : 1.0509491,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 63,
+      "tokensPerSecond" : 43.73712,
+      "totalTimeMs" : 4308.817,
+      "ttftMs" : 2865.576
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.742959,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.1094,
+      "modelAnswer" : "Account acknowledges that Red Bull North America, Inc. is not a party to this agreement.",
+      "promptTokens" : 1266,
+      "question" : "Is Red Bull North America Inc. a party to the VIP Opt-In Contract?",
+      "questionId" : "ui_po4",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.8202056,
+      "retrievalTimeMs" : 1.0750294,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 26,
+      "tokensPerSecond" : 41.09808,
+      "totalTimeMs" : 3551.189,
+      "ttftMs" : 2915.633
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7360449,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.1094,
+      "modelAnswer" : "The context does not state when the 2025 VIP OPT-IN CONTRACT is effective.",
+      "promptTokens" : 1265,
+      "question" : "Until when is the 2025 VIP Opt-In Contract effective?",
+      "questionId" : "ui_po5",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.62733144,
+      "retrievalTimeMs" : 1.0550022,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 20,
+      "tokensPerSecond" : 40.759686,
+      "totalTimeMs" : 3238.251,
+      "ttftMs" : 2744.694
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7089844,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.1094,
+      "modelAnswer" : "NO LESS THAN 30 DAYS’ PRIOR WRITTEN NOTICE is required to change participation level.",
+      "promptTokens" : 1187,
+      "question" : "How many days notice is required to change participation level?",
+      "questionId" : "ui_po6",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.65125,
+      "retrievalTimeMs" : 1.2199879,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 20,
+      "tokensPerSecond" : 41.371124,
+      "totalTimeMs" : 3067.003,
+      "ttftMs" : 2580.523
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.6709566,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.1406,
+      "modelAnswer" : "EITHER PARTY MAY IMMEDIATELY TERMINATE THIS AGREEMENT IF THE OTHER PARTY FAILS TO CURE A MATERIAL BREACH OF THIS AGREEMENT WITHIN THREE (3) DAYS AFTER RECEIPT OF WRITTEN NOTICE OF DEFAULT.",
+      "promptTokens" : 1189,
+      "question" : "How many days does a party have to cure a material breach?",
+      "questionId" : "ui_po7",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.69142854,
+      "retrievalTimeMs" : 1.2520552,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 46,
+      "tokensPerSecond" : 43.577316,
+      "totalTimeMs" : 3640.272,
+      "ttftMs" : 2581.655
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.685977,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : false,
+      "memoryFootprintMB" : 3242.1406,
+      "modelAnswer" : "The context does not specify what size cold equipment is required for premium cold cashier.",
+      "promptTokens" : 1260,
+      "question" : "What size cold equipment is required for Premium Cold Cashier?",
+      "questionId" : "ui_po8",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.64848036,
+      "retrievalTimeMs" : 1.0639429,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 24,
+      "tokensPerSecond" : 40.761147,
+      "totalTimeMs" : 3446.592,
+      "ttftMs" : 2854.948
+    }
+  ],
+  "resultsWithImages" : [
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7889738,
+      "expectedAnswer" : "8.4 oz shelf discount is -$3.50 and case cost is $38.50.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1406,
+      "modelAnswer" : "The 8.4 oz Case Cost for the Diamond (12 Linear Feet) contract is $38.50. The Shelf Discount is -$3.50.",
+      "promptTokens" : 1561,
+      "question" : "In the Diamond (12 Linear Feet) contract, what are the 8.4 oz shelf discount and case cost?",
+      "questionId" : "q001",
+      "relevantChunkIds" : [
+        "1b935a40e0ef"
+      ],
+      "retrievalConfidence" : 0.7790909,
+      "retrievalTimeMs" : 1.1080503,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 44,
+      "tokensPerSecond" : 44.056168,
+      "totalTimeMs" : 4395.704,
+      "ttftMs" : 3393.993
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.77598,
+      "expectedAnswer" : "The 12 oz case cost under Shelf + Cold Cashier Discount is $48.95.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1406,
+      "modelAnswer" : "The 12 oz Case Cost under Shelf + Cold Cashier Discount in the Diamond contract is $48.95.",
+      "promptTokens" : 1518,
+      "question" : "In the Diamond contract, what is the 12 oz case cost under Shelf + Cold Cashier Discount?",
+      "questionId" : "q002",
+      "relevantChunkIds" : [
+        "1b935a40e0ef"
+      ],
+      "retrievalConfidence" : 0.765,
+      "retrievalTimeMs" : 1.0899305,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img01.png",
+        "RBDC Diamond Groc - Static_p001_img00.png"
+      ],
+      "tokensGenerated" : 26,
+      "tokensPerSecond" : 41.7237,
+      "totalTimeMs" : 4003.584,
+      "ttftMs" : 3377.44
+    },
+    {
+      "category" : "standards",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7809868,
+      "expectedAnswer" : "Platinum Groc is defined as 4 Linear Feet.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1562,
+      "modelAnswer" : "PLATINUM (4 Linear Feet)",
+      "promptTokens" : 1314,
+      "question" : "In the Platinum Groc contract, how much shelf space is defined for the program?",
+      "questionId" : "q003",
+      "relevantChunkIds" : [
+        "e2b870e91444"
+      ],
+      "retrievalConfidence" : 0.59000003,
+      "retrievalTimeMs" : 1.1020899,
+      "retrievedChunkIds" : [
+        "293442e5758b",
+        "814f4d607f3c",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+        "RBDC Platinum Groc - Static_p001_img02.png",
+        "RBDC Platinum Groc - Static_p001_img03.png"
+      ],
+      "tokensGenerated" : 16,
+      "tokensPerSecond" : 40.23224,
+      "totalTimeMs" : 3263.3691,
+      "ttftMs" : 2862.651
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7980337,
+      "expectedAnswer" : "The 8.4 oz case cost under Shelf + Cold Cashier Discount is $35.75.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1562,
+      "modelAnswer" : "The 8.4 oz Case Cost under Shelf + Cold Cashier Discount in Double Diamond Groc is $35.75.",
+      "promptTokens" : 1435,
+      "question" : "In Double Diamond Groc, what is the 8.4 oz case cost under Shelf + Cold Cashier Discount?",
+      "questionId" : "q004",
+      "relevantChunkIds" : [
+        "aba18b109de4"
+      ],
+      "retrievalConfidence" : 0.7275,
+      "retrievalTimeMs" : 1.1359453,
+      "retrievedChunkIds" : [
+        "aba18b109de4",
+        "a826b714efc2",
+        "1b935a40e0ef"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 36,
+      "tokensPerSecond" : 42.83776,
+      "totalTimeMs" : 3892.067,
+      "ttftMs" : 3048.6191
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.8490553,
+      "expectedAnswer" : "The 12 oz case cost under Shelf + Cold Cashier Discount is $48.20.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1562,
+      "modelAnswer" : "$48.20",
+      "promptTokens" : 1525,
+      "question" : "In Triple Diamond Groc (16 Linear Feet), what is the 12 oz case cost under Shelf + Cold Cashier Discount?",
+      "questionId" : "q005",
+      "relevantChunkIds" : [
+        "ee6ff127e609"
+      ],
+      "retrievalConfidence" : 0.7573779,
+      "retrievalTimeMs" : 1.1349916,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "1b935a40e0ef",
+        "aba18b109de4",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Trpl Diamond Groc - Static_p001_img01.png",
+        "RBDC Trpl Diamond Groc - Static_p001_img00.png"
+      ],
+      "tokensGenerated" : 13,
+      "tokensPerSecond" : 39.161827,
+      "totalTimeMs" : 3675.021,
+      "ttftMs" : 3339.955
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7709732,
+      "expectedAnswer" : "The 12 oz case cost under S.P. + P.C.C. + A.C. Discount is $47.95.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "$47.95",
+      "promptTokens" : 1438,
+      "question" : "In Triple Diamond Conv (7 Shelves), what is the 12 oz case cost under S.P. + P.C.C. + A.C. Discount?",
+      "questionId" : "q006",
+      "relevantChunkIds" : [
+        "a79ce7f506c2"
+      ],
+      "retrievalConfidence" : 0.71727276,
+      "retrievalTimeMs" : 1.0979176,
+      "retrievedChunkIds" : [
+        "a79ce7f506c2",
+        "ee6ff127e609",
+        "ce95333f51d2",
+        "1b935a40e0ef"
+      ],
+      "returnedImages" : [
+        "RBDC Trpl Diamond Conv - Static_p001_img03.png",
+        "RBDC Trpl Diamond Conv - Static_p001_img02.png"
+      ],
+      "tokensGenerated" : 13,
+      "tokensPerSecond" : 40.106014,
+      "totalTimeMs" : 3366.5142,
+      "ttftMs" : 3039.3672
+    },
+    {
+      "category" : "placement",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7100573,
+      "expectedAnswer" : "Red Bull must be placed in the Strike Zone, 4-6 ft. from the ground.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "Ensure Red Bull is placed in the Strike Zone (4-6 ft. from ground)",
+      "promptTokens" : 1547,
+      "question" : "What strike zone placement standard is required for Red Bull?",
+      "questionId" : "q007",
+      "relevantChunkIds" : [
+        "e2b870e91444"
+      ],
+      "retrievalConfidence" : 0.5955085,
+      "retrievalTimeMs" : 1.060009,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 24,
+      "tokensPerSecond" : 42.14815,
+      "totalTimeMs" : 3902.99,
+      "ttftMs" : 3330.707
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.718998,
+      "expectedAnswer" : "EDLP limits are: 8.4oz at no more than 2\/$5, 12oz at no more than 2\/$6, and 16oz at no more than 2\/$8.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1719,
+      "modelAnswer" : "The EDLP limits are:\n* 8.4oz singles: no more than 2\/$5\n* 12oz singles: no more than 2\/$6\n* 16oz singles: no more than 2\/$8",
+      "promptTokens" : 1561,
+      "question" : "What EDLP limits are specified for 8.4oz, 12oz, and 16oz singles?",
+      "questionId" : "q008",
+      "relevantChunkIds" : [
+        "aba18b109de4"
+      ],
+      "retrievalConfidence" : 0.7075614,
+      "retrievalTimeMs" : 1.0780096,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 52,
+      "tokensPerSecond" : 43.972477,
+      "totalTimeMs" : 4571.588,
+      "ttftMs" : 3386.125
+    },
+    {
+      "category" : "placement",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7700195,
+      "expectedAnswer" : "Cold Red Bull should be placed within 8 feet of the register line.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1406,
+      "modelAnswer" : "Yes, I will opt into Premium Cold Cashier and place cold Red Bull within 8 feet of the register line",
+      "promptTokens" : 1554,
+      "question" : "Under Premium Cold Cashier, how close to the register line should cold Red Bull be placed?",
+      "questionId" : "q009",
+      "relevantChunkIds" : [
+        "ee6ff127e609"
+      ],
+      "retrievalConfidence" : 0.6977169,
+      "retrievalTimeMs" : 1.1180639,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 30,
+      "tokensPerSecond" : 42.5287,
+      "totalTimeMs" : 4247.407,
+      "ttftMs" : 3539.022
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6950369,
+      "expectedAnswer" : "Premium cold equipment must hold 3+ cases.",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1562,
+      "modelAnswer" : "Based on the context provided, the capacity requirement for premium cold equipment under the standard shelf program with premium cold cashier is not specified. The context lists case costs for different sizes (8.4 oz, 12 oz, 16 oz, 20 oz) but does not state a required capacity for the equipment.",
+      "promptTokens" : 1266,
+      "question" : "Under Premium Cold Cashier (standard shelf program), what capacity must premium cold equipment hold?",
+      "questionId" : "q010",
+      "relevantChunkIds" : [
+        "aba18b109de4"
+      ],
+      "retrievalConfidence" : 0.63355064,
+      "retrievalTimeMs" : 1.0319948,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 74,
+      "tokensPerSecond" : 44.30525,
+      "totalTimeMs" : 4437.667,
+      "ttftMs" : 2764.524
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7470121,
+      "expectedAnswer" : "No, Red Bull barrels or other equipment are not eligible for discount.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "Red Bull barrels or other equipment are not eligible for discount.",
+      "promptTokens" : 1373,
+      "question" : "In Triple Diamond Conv additional cooler terms, are Red Bull barrels eligible for discount?",
+      "questionId" : "q011",
+      "relevantChunkIds" : [
+        "f384c6d6761f"
+      ],
+      "retrievalConfidence" : 0.70259255,
+      "retrievalTimeMs" : 1.0910034,
+      "retrievedChunkIds" : [
+        "f384c6d6761f",
+        "a79ce7f506c2",
+        "ce95333f51d2",
+        "ee6ff127e609"
+      ],
+      "returnedImages" : [
+        "RBDC Trpl Diamond Conv - Static_p001_img02.png",
+        "RBDC Trpl Diamond Conv - Static_p001_img03.png"
+      ],
+      "tokensGenerated" : 20,
+      "tokensPerSecond" : 40.582767,
+      "totalTimeMs" : 3682.0469,
+      "ttftMs" : 3186.235
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.750946,
+      "expectedAnswer" : "The additional cooler must hold 2+ cases and be placed in a high foot traffic area of the store.",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "Based on the context provided, the cooler options listed under \"Cooler Options\" are Platinum, Diamond, and Triple Diamond.",
+      "promptTokens" : 1256,
+      "question" : "In Triple Diamond Conv additional cooler terms, what are the cooler placement requirements?",
+      "questionId" : "q012",
+      "relevantChunkIds" : [
+        "f384c6d6761f"
+      ],
+      "retrievalConfidence" : 0.64000005,
+      "retrievalTimeMs" : 1.1940002,
+      "retrievedChunkIds" : [
+        "ce95333f51d2",
+        "b59c318c253b",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+        "RBDC Trpl Diamond Conv - Static_p001_img02.png",
+        "RBDC Trpl Diamond Conv - Static_p001_img03.png"
+      ],
+      "tokensGenerated" : 33,
+      "tokensPerSecond" : 44.07434,
+      "totalTimeMs" : 3462.134,
+      "ttftMs" : 2710.282
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7300844,
+      "expectedAnswer" : "Suggested retail prices are: 8.4oz $2.69, 12oz $3.59, 16oz $4.39, and 20oz $5.39.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1719,
+      "modelAnswer" : "The suggested retail prices listed are:\n8.4oz: $2.69\n12oz: $3.59\n16oz: $4.39\n20oz: $5.39",
+      "promptTokens" : 1566,
+      "question" : "What suggested retail prices are listed for 8.4oz, 12oz, 16oz, and 20oz singles?",
+      "questionId" : "q013",
+      "relevantChunkIds" : [
+        "1b935a40e0ef"
+      ],
+      "retrievalConfidence" : 0.73006576,
+      "retrievalTimeMs" : 1.0509491,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 48,
+      "tokensPerSecond" : 43.618877,
+      "totalTimeMs" : 4525.446,
+      "ttftMs" : 3422.133
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.742959,
+      "expectedAnswer" : "In Platinum Liquor, the 8.4 oz shelf discount is -$4.75 and case cost is $37.25.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "The 8.4 oz Case Cost in Platinum Liquor is $37.25. The shelf discount for 8.4oz singles is no more than 2\/$5.",
+      "promptTokens" : 1477,
+      "question" : "In Platinum Liquor, what are the 8.4 oz shelf discount and case cost?",
+      "questionId" : "q014",
+      "relevantChunkIds" : [
+        "049f372a13a7"
+      ],
+      "retrievalConfidence" : 0.78375,
+      "retrievalTimeMs" : 1.0750294,
+      "retrievedChunkIds" : [
+        "049f372a13a7",
+        "0d289b730c5b",
+        "e2b870e91444",
+        "293442e5758b"
+      ],
+      "returnedImages" : [
+        "RBDC Platinum Liquor - Static_p000_img04.png",
+        "RBDC Platinum Liquor - Static_p000_img28.png"
+      ],
+      "tokensGenerated" : 38,
+      "tokensPerSecond" : 42.643494,
+      "totalTimeMs" : 4226.507,
+      "ttftMs" : 3332.354
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7340183,
+      "expectedAnswer" : "The 16 oz EDLP case discount is -$2.00 and case cost is $33.11.",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "The 16 oz EDLP details state: \"Opt in for additional $ 1 OFF VIP Case Cost\".",
+      "promptTokens" : 1354,
+      "question" : "What are the 16 oz EDLP case discount and case cost in the contract details?",
+      "questionId" : "q015",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.79,
+      "retrievalTimeMs" : 1.0629892,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "814f4d607f3c",
+        "a826b714efc2"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 30,
+      "tokensPerSecond" : 41.798218,
+      "totalTimeMs" : 3719.3552,
+      "ttftMs" : 2998.686
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.726985,
+      "expectedAnswer" : "The agreement continues until December 31, 2025, unless terminated earlier.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "until December 31, 2025, unless earlier terminated by Distributor or Account as provided herein.",
+      "promptTokens" : 1187,
+      "question" : "Until what date does the agreement continue unless terminated earlier?",
+      "questionId" : "q016",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.7075,
+      "retrievalTimeMs" : 1.2440681,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 23,
+      "tokensPerSecond" : 41.09242,
+      "totalTimeMs" : 3175.881,
+      "ttftMs" : 2613.013
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.709938,
+      "expectedAnswer" : "Changing participation level requires no less than 30 days' prior written notice.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2344,
+      "modelAnswer" : "NO LESS THAN 30 DAYS’ PRIOR WRITTEN NOTICE is required to change its participation level.",
+      "promptTokens" : 1188,
+      "question" : "How much prior written notice is required to change participation level?",
+      "questionId" : "q017",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.66999996,
+      "retrievalTimeMs" : 1.2370348,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 21,
+      "tokensPerSecond" : 41.370182,
+      "totalTimeMs" : 3102.741,
+      "ttftMs" : 2592.013
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.7629862,
+      "expectedAnswer" : "The cure period is within three (3) days after receipt of written notice of default.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2344,
+      "modelAnswer" : "EITHER PARTY MAY IMMEDIATELY TERMINATE THIS AGREEMENT IF THE OTHER PARTY FAILS TO CURE A MATERIAL BREACH OF THIS AGREEMENT WITHIN THREE (3) DAYS AFTER RECEIPT OF WRITTEN NOTICE OF DEFAULT.",
+      "promptTokens" : 1191,
+      "question" : "What is the cure period for a material breach after written notice of default?",
+      "questionId" : "q018",
+      "relevantChunkIds" : [
+        "ad30bffb886f"
+      ],
+      "retrievalConfidence" : 0.71999997,
+      "retrievalTimeMs" : 1.248002,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 46,
+      "tokensPerSecond" : 43.310547,
+      "totalTimeMs" : 3651.156,
+      "ttftMs" : 2585.86
+    },
+    {
+      "category" : "legal",
+      "difficulty" : "easy",
+      "embeddingTimeMs" : 1.6380548,
+      "expectedAnswer" : "No. The agreement states that Red Bull North America, Inc. is not a party to this agreement.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "Account acknowledges that Red Bull North America, Inc. is not a party to this agreement.",
+      "promptTokens" : 1263,
+      "question" : "Is Red Bull North America, Inc. a party to this agreement?",
+      "questionId" : "q019",
+      "relevantChunkIds" : [
+        "b59c318c253b"
+      ],
+      "retrievalConfidence" : 0.82068473,
+      "retrievalTimeMs" : 1.1969805,
+      "retrievedChunkIds" : [
+        "a826b714efc2",
+        "814f4d607f3c",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 26,
+      "tokensPerSecond" : 41.342937,
+      "totalTimeMs" : 3481.125,
+      "ttftMs" : 2849.251
+    },
+    {
+      "category" : "execution",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7960072,
+      "expectedAnswer" : "The account agrees to buy a minimum of 15 cases and no more than 30 cases.",
+      "hitAtK" : true,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1875,
+      "modelAnswer" : "The account agrees to buy a minimum of 15 cases but no more than 30 cases.",
+      "promptTokens" : 1265,
+      "question" : "What minimum and maximum purchase case count is required in the EDLP details section?",
+      "questionId" : "q020",
+      "relevantChunkIds" : [
+        "b59c318c253b"
+      ],
+      "retrievalConfidence" : 0.5502077,
+      "retrievalTimeMs" : 1.101017,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 29,
+      "tokensPerSecond" : 41.832855,
+      "totalTimeMs" : 3454.528,
+      "ttftMs" : 2758.21
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7540455,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The 8.4 oz case cost is $2.25 and the shelf discount is $39.75.",
+      "promptTokens" : 1351,
+      "question" : "In Platinum Groc, what is the 8.4 oz Shelf Discount and Case Cost?",
+      "questionId" : "ui_p01",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7275,
+      "retrievalTimeMs" : 1.2149811,
+      "retrievedChunkIds" : [
+        "e2b870e91444",
+        "293442e5758b",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+        "RBDC Platinum Groc - Static_p001_img02.png",
+        "RBDC Platinum Groc - Static_p001_img03.png"
+      ],
+      "tokensGenerated" : 34,
+      "tokensPerSecond" : 42.699352,
+      "totalTimeMs" : 3766.843,
+      "ttftMs" : 2967.46
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7740726,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The case costs for 8.4 oz and 12 oz in diamond groc are $42.00 and $54.70, respectively.",
+      "promptTokens" : 1275,
+      "question" : "In Diamond Groc, what are the Shelf + Cold Cashier case costs for 8.4 oz and 12 oz?",
+      "questionId" : "ui_p02",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.70602214,
+      "retrievalTimeMs" : 1.1049509,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img01.png",
+        "RBDC Diamond Groc - Static_p001_img00.png"
+      ],
+      "tokensGenerated" : 43,
+      "tokensPerSecond" : 43.306744,
+      "totalTimeMs" : 3777.125,
+      "ttftMs" : 2781.144
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7709732,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1719,
+      "modelAnswer" : "The 8.4 oz shelf + cold cashier discount and case cost in Double Diamond Groc are:\nShelf Discount: -$6.25 on the 8.4 oz Case Cost, resulting in a $35.75 for the 12 oz Case Cost.\nThe case costs are:\n8.4 oz Case Cost: $35.75 (with discount)\n12 oz Case Cost: $48.45 (with discount)",
+      "promptTokens" : 1435,
+      "question" : "In Double Diamond Groc, what is the 8.4 oz Shelf + Cold Cashier Discount and Case Cost?",
+      "questionId" : "ui_p03",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7581818,
+      "retrievalTimeMs" : 1.1270046,
+      "retrievedChunkIds" : [
+        "aba18b109de4",
+        "a826b714efc2",
+        "1b935a40e0ef"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 99,
+      "tokensPerSecond" : 43.95298,
+      "totalTimeMs" : 5438.879,
+      "ttftMs" : 3183.433
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7230511,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The shelf program case costs for 8.4 oz are -$4.25 and $37.75. The shelf program case costs for 12 oz are $50.45 and $48.20.",
+      "promptTokens" : 1361,
+      "question" : "In Triple Diamond Groc, what are the Shelf Program case costs for 8.4 oz and 12 oz?",
+      "questionId" : "ui_p04",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7183838,
+      "retrievalTimeMs" : 1.0550022,
+      "retrievedChunkIds" : [
+        "b59c318c253b",
+        "ee6ff127e609",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+        "RBDC Trpl Diamond Groc - Static_p001_img01.png",
+        "RBDC Trpl Diamond Groc - Static_p001_img00.png"
+      ],
+      "tokensGenerated" : 50,
+      "tokensPerSecond" : 43.617683,
+      "totalTimeMs" : 4441.102,
+      "ttftMs" : 3291.866
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7789602,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The case costs for the 16 oz option in the RBDC Trpl Diamond Conv are: $42.00, $54.70, $36.11, and $43.23.",
+      "promptTokens" : 1263,
+      "question" : "In Triple Diamond Conv, what are the three discount tiers and 8.4 oz case costs for each?",
+      "questionId" : "ui_p05",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6354546,
+      "retrievalTimeMs" : 1.2710094,
+      "retrievedChunkIds" : [
+        "ce95333f51d2",
+        "b59c318c253b",
+        "814f4d607f3c"
+      ],
+      "returnedImages" : [
+        "RBDC Trpl Diamond Conv - Static_p001_img02.png",
+        "RBDC Trpl Diamond Conv - Static_p001_img03.png"
+      ],
+      "tokensGenerated" : 49,
+      "tokensPerSecond" : 43.412582,
+      "totalTimeMs" : 3976.031,
+      "ttftMs" : 2844.096
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.77598,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The 8.4 oz Case Cost in Platinum Liquor is $37.25. The shelf discount for 8.4oz singles is no more than 2\/$5.",
+      "promptTokens" : 1477,
+      "question" : "In Platinum Liquor, what is the 8.4 oz Shelf Discount and Case Cost?",
+      "questionId" : "ui_p06",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.78375,
+      "retrievalTimeMs" : 1.1149645,
+      "retrievedChunkIds" : [
+        "049f372a13a7",
+        "0d289b730c5b",
+        "e2b870e91444",
+        "293442e5758b"
+      ],
+      "returnedImages" : [
+        "RBDC Platinum Liquor - Static_p000_img04.png",
+        "RBDC Platinum Liquor - Static_p000_img28.png"
+      ],
+      "tokensGenerated" : 38,
+      "tokensPerSecond" : 43.002914,
+      "totalTimeMs" : 4204.818,
+      "ttftMs" : 3318.052
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7700195,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The 16 oz EDLP case discount is -$2.00 and the resulting case cost is $33.11.",
+      "promptTokens" : 1192,
+      "question" : "What is the 16 oz EDLP Case Discount and resulting Case Cost?",
+      "questionId" : "ui_p07",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.7075,
+      "retrievalTimeMs" : 1.3109446,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 28,
+      "tokensPerSecond" : 41.515495,
+      "totalTimeMs" : 3319.388,
+      "ttftMs" : 2641.662
+    },
+    {
+      "category" : "pricing",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7750263,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The suggested retail prices are:\n8.4oz: $2.69\n12oz: $3.59\n16oz: $4.39\n20oz: $5.39",
+      "promptTokens" : 1567,
+      "question" : "What are the Suggested Retail Prices for 8.4oz, 12oz, 16oz, and 20oz Red Bull?",
+      "questionId" : "ui_p08",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.77520573,
+      "retrievalTimeMs" : 1.0889769,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 47,
+      "tokensPerSecond" : 43.760944,
+      "totalTimeMs" : 4478.361,
+      "ttftMs" : 3401.394
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7669201,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "Based on the context provided, the 8.4 oz shelf discounts are listed under the \"Case Cost before Program Discounts\" section for different product sizes across the contracts.\n\nFor the 2025 VIP OPT-IN CONTRACT (which appears in both the Double Diamond Groc and Diamond Groc sources):\n*   The \"16 oz EDLP Details\" states: \"Opt in for additional $ 1 OFF VIP Case Cost\".\n\nThe specific dollar amounts for the \"Case Cost before Program Discounts\" for the 8.4 oz size are not explicitly provided for comparison across the three programs.",
+      "promptTokens" : 1279,
+      "question" : "Compare Platinum, Diamond, and Double Diamond Groc: what are the 8.4 oz shelf discounts?",
+      "questionId" : "ui_c01",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.66999996,
+      "retrievalTimeMs" : 1.2199879,
+      "retrievedChunkIds" : [
+        "a826b714efc2",
+        "814f4d607f3c",
+        "ce95333f51d2"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 123,
+      "tokensPerSecond" : 43.360455,
+      "totalTimeMs" : 5696.355,
+      "ttftMs" : 2856.49
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7750263,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.1562,
+      "modelAnswer" : "For 8.4 oz:\nTriple Diamond Groc Shelf Program: $37.75\nTriple Diamond Conv Shelf Program: $35.50\n\nFor 12 oz:\nTriple Diamond Groc Shelf Program: $48.20\nTriple Diamond Conv Shelf Program: $48.20",
+      "promptTokens" : 1317,
+      "question" : "Compare Triple Diamond Conv vs Triple Diamond Groc shelf case costs for 8.4 oz and 12 oz.",
+      "questionId" : "ui_c02",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6456579,
+      "retrievalTimeMs" : 1.0939837,
+      "retrievedChunkIds" : [
+        "b59c318c253b",
+        "ce95333f51d2",
+        "ee6ff127e609"
+      ],
+      "returnedImages" : [
+        "RBDC Trpl Diamond Groc - Static_p001_img01.png",
+        "RBDC Trpl Diamond Groc - Static_p001_img00.png"
+      ],
+      "tokensGenerated" : 68,
+      "tokensPerSecond" : 44.178623,
+      "totalTimeMs" : 4786.206,
+      "ttftMs" : 3243.995
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.6950369,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "The 8.4 oz case cost for the shelf + cold cashier program is $42.00.",
+      "promptTokens" : 1269,
+      "question" : "Which tier has the lowest 8.4 oz case cost in the Shelf + Cold Cashier program?",
+      "questionId" : "ui_c03",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.73031616,
+      "retrievalTimeMs" : 1.0370016,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 23,
+      "tokensPerSecond" : 41.633026,
+      "totalTimeMs" : 3486.575,
+      "ttftMs" : 2931.216
+    },
+    {
+      "category" : "comparison",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.8180609,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2031,
+      "modelAnswer" : "Based on the provided context, there is no information regarding the linear feet required for each grocery tier.",
+      "promptTokens" : 1279,
+      "question" : "How many Linear Feet does each Grocery tier require? List Platinum, Diamond, Double Diamond, Triple Diamond.",
+      "questionId" : "ui_c04",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.5783985,
+      "retrievalTimeMs" : 1.1379719,
+      "retrievedChunkIds" : [
+        "a826b714efc2",
+        "b59c318c253b",
+        "ce95333f51d2"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 28,
+      "tokensPerSecond" : 41.657677,
+      "totalTimeMs" : 3414.278,
+      "ttftMs" : 2738.9832
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7210245,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2188,
+      "modelAnswer" : "Ensure Red Bull is placed in the Strike Zone (4-6 ft. from ground)",
+      "promptTokens" : 1548,
+      "question" : "What is the Strike Zone requirement for Red Bull shelf placement?",
+      "questionId" : "ui_po1",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6518393,
+      "retrievalTimeMs" : 1.0509491,
+      "retrievedChunkIds" : [
+        "ee6ff127e609",
+        "aba18b109de4",
+        "1b935a40e0ef",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 24,
+      "tokensPerSecond" : 42.326694,
+      "totalTimeMs" : 3966.205,
+      "ttftMs" : 3396.315
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7420053,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2188,
+      "modelAnswer" : "The EDLP price limits are:\n* 8.4oz singles: no more than 2\/$5\n* 12oz singles: no more than 2\/$6\n* 16oz singles: no more than 2\/$8",
+      "promptTokens" : 1562,
+      "question" : "What are the EDLP price limits for 8.4oz, 12oz, and 16oz singles?",
+      "questionId" : "ui_po2",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6512826,
+      "retrievalTimeMs" : 1.0570288,
+      "retrievedChunkIds" : [
+        "1b935a40e0ef",
+        "ee6ff127e609",
+        "aba18b109de4",
+        "e2b870e91444"
+      ],
+      "returnedImages" : [
+
+      ],
+      "tokensGenerated" : 53,
+      "tokensPerSecond" : 44.01003,
+      "totalTimeMs" : 4586.208,
+      "ttftMs" : 3379.039
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7470121,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2188,
+      "modelAnswer" : "The premium cold cashier placement requirement is:\n\"I understand that this option is only valid if I already opted into a Platinum + tier and Premium Cold Cashier execution.\"",
+      "promptTokens" : 1258,
+      "question" : "What are the Premium Cold Cashier placement requirements?",
+      "questionId" : "ui_po3",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.6713746,
+      "retrievalTimeMs" : 1.0900497,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 41,
+      "tokensPerSecond" : 42.38304,
+      "totalTimeMs" : 3840.477,
+      "ttftMs" : 2870.099
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7760992,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2188,
+      "modelAnswer" : "Account acknowledges that Red Bull North America, Inc. is not a party to this agreement.",
+      "promptTokens" : 1266,
+      "question" : "Is Red Bull North America Inc. a party to the VIP Opt-In Contract?",
+      "questionId" : "ui_po4",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.8202056,
+      "retrievalTimeMs" : 1.0669231,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 26,
+      "tokensPerSecond" : 41.09386,
+      "totalTimeMs" : 3456.602,
+      "ttftMs" : 2820.881
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.8130541,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2188,
+      "modelAnswer" : "The context does not state when the 2025 VIP OPT-IN CONTRACT is effective.",
+      "promptTokens" : 1265,
+      "question" : "Until when is the 2025 VIP Opt-In Contract effective?",
+      "questionId" : "ui_po5",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.62733144,
+      "retrievalTimeMs" : 1.0809898,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 20,
+      "tokensPerSecond" : 40.793846,
+      "totalTimeMs" : 3235.825,
+      "ttftMs" : 2742.464
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.7650127,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2656,
+      "modelAnswer" : "NO LESS THAN 30 DAYS’ PRIOR WRITTEN NOTICE is required to change participation level.",
+      "promptTokens" : 1187,
+      "question" : "How many days notice is required to change participation level?",
+      "questionId" : "ui_po6",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.65125,
+      "retrievalTimeMs" : 1.2350082,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 20,
+      "tokensPerSecond" : 41.179794,
+      "totalTimeMs" : 3058.114,
+      "ttftMs" : 2569.24
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.8080473,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2656,
+      "modelAnswer" : "EITHER PARTY MAY IMMEDIATELY TERMINATE THIS AGREEMENT IF THE OTHER PARTY FAILS TO CURE A MATERIAL BREACH OF THIS AGREEMENT WITHIN THREE (3) DAYS AFTER RECEIPT OF WRITTEN NOTICE OF DEFAULT.",
+      "promptTokens" : 1189,
+      "question" : "How many days does a party have to cure a material breach?",
+      "questionId" : "ui_po7",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.69142854,
+      "retrievalTimeMs" : 1.2689829,
+      "retrievedChunkIds" : [
+        "a6248436795a",
+        "ad30bffb886f",
+        "1440e976b3ce"
+      ],
+      "returnedImages" : [
+        "RBDC Dbl Diamond Groc - Static_p001_img00.png",
+        "RBDC Dbl Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 46,
+      "tokensPerSecond" : 43.541767,
+      "totalTimeMs" : 3628.435,
+      "ttftMs" : 2568.72
+    },
+    {
+      "category" : "policy",
+      "difficulty" : "medium",
+      "embeddingTimeMs" : 1.6959906,
+      "expectedAnswer" : "",
+      "hitAtK" : false,
+      "includeImages" : true,
+      "memoryFootprintMB" : 3242.2656,
+      "modelAnswer" : "The context does not specify what size cold equipment is required for premium cold cashier.",
+      "promptTokens" : 1260,
+      "question" : "What size cold equipment is required for Premium Cold Cashier?",
+      "questionId" : "ui_po8",
+      "relevantChunkIds" : [
+
+      ],
+      "retrievalConfidence" : 0.64848036,
+      "retrievalTimeMs" : 1.0669231,
+      "retrievedChunkIds" : [
+        "814f4d607f3c",
+        "a826b714efc2",
+        "b59c318c253b"
+      ],
+      "returnedImages" : [
+        "RBDC Diamond Groc - Static_p001_img00.png",
+        "RBDC Diamond Groc - Static_p001_img01.png"
+      ],
+      "tokensGenerated" : 24,
+      "tokensPerSecond" : 40.75056,
+      "totalTimeMs" : 3422.683,
+      "ttftMs" : 2830.811
+    }
+  ],
+  "summaryTextOnly" : {
+    "errorCount" : 0,
+    "hitAtKRate" : 0.85,
+    "mode" : "text_only",
+    "peakMemoryMB" : 3243.7188,
+    "questionCount" : 40,
+    "retrievalConfidenceMean" : 0.6983736,
+    "retrievalTimeMean" : 1.1041405,
+    "retrievalTimeP95" : 1.2520552,
+    "successCount" : 40,
+    "totalDurationSeconds" : 153.6244,
+    "totalTimeMean" : 3523.5288,
+    "totalTimeP50" : 3500.205,
+    "totalTimeP95" : 4609.564,
+    "tpsMax" : 50.64076,
+    "tpsMean" : 43.40564,
+    "tpsMin" : 0,
+    "ttftMean" : 2695.145,
+    "ttftP50" : 2649.224,
+    "ttftP95" : 3398.441
+  },
+  "summaryWithImages" : {
+    "errorCount" : 0,
+    "hitAtKRate" : 0.85,
+    "mode" : "with_images",
+    "peakMemoryMB" : 3242.2656,
+    "questionCount" : 40,
+    "retrievalConfidenceMean" : 0.6983736,
+    "retrievalTimeMean" : 1.1287928,
+    "retrievalTimeP95" : 1.2689829,
+    "successCount" : 40,
+    "totalDurationSeconds" : 153.6244,
+    "totalTimeMean" : 3905.4336,
+    "totalTimeP50" : 3766.843,
+    "totalTimeP95" : 4786.206,
+    "tpsMax" : 44.30525,
+    "tpsMean" : 42.37293,
+    "tpsMin" : 39.161827,
+    "ttftMean" : 3012.6948,
+    "ttftP50" : 2931.216,
+    "ttftP95" : 3401.394
+  },
+  "timestamp" : "2026-05-07T08:11:59Z"
+}

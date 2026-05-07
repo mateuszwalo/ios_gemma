@@ -145,13 +145,15 @@ class LlamaRunner: ObservableObject {
             guard nPromptTokens > 0 else {
                 throw LlamaError.tokenizationFailed
             }
-            tokens = Array(tokens.prefix(Int(nPromptTokens)))
+            let safeLimit = batchSize - Int32(maxGenTokens) - 16
+            let effectivePromptTokens = min(nPromptTokens, safeLimit)
+            tokens = Array(tokens.prefix(Int(effectivePromptTokens)))
 
             llama_memory_clear(llama_get_memory(context), true)
 
             llama_batch_clear(&batch)
-            for i in 0..<Int(nPromptTokens) {
-                let isLast = (i == Int(nPromptTokens) - 1)
+            for i in 0..<Int(effectivePromptTokens) {
+                let isLast = (i == Int(effectivePromptTokens) - 1)
                 llama_batch_add(&batch, tokens[i], Int32(i), [0], isLast)
             }
 
@@ -163,7 +165,7 @@ class LlamaRunner: ObservableObject {
             var outputTokens: [llama_token] = []
             let stopStrings = ["<end_of_turn>", "<start_of_turn>"]
             var generatedText = ""
-            var nCur = nPromptTokens
+            var nCur = effectivePromptTokens
 
             for _ in 0..<maxGenTokens {
                 let newToken = llama_sampler_sample(useSampler, context, -1)
@@ -220,7 +222,7 @@ class LlamaRunner: ObservableObject {
             return GenerationOutput(
                 text: generatedText.trimmingCharacters(in: .whitespacesAndNewlines),
                 tokensGenerated: outputTokens.count,
-                promptTokens: Int(nPromptTokens),
+                promptTokens: Int(effectivePromptTokens),
                 ttftMs: ttftMs,
                 totalTimeMs: totalMs,
                 tokensPerSecond: tps

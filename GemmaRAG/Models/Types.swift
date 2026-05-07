@@ -130,7 +130,7 @@ struct RAGConfig {
     var searchPoolK: Int = 20
     var rerankAlpha: Float = 0.65
     var sourceBoost: Float = 0.08
-    var maxContextChars: Int = 5000
+    var maxContextChars: Int = 4000
     var maxContextChunks: Int = 6
     var maxImages: Int = 2
     var minRetrievalConfidence: Float = 0.10

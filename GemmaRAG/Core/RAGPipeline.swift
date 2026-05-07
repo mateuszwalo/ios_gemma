@@ -269,9 +269,10 @@ class RAGPipeline {
 
     static func isGarbageChunk(_ text: String) -> Bool {
         if text.count < 150 { return true }
-        let letters = text.unicodeScalars.filter { CharacterSet.letters.contains($0) }.count
-        let ratio = Float(letters) / max(Float(text.count), 1)
-        return text.count < 300 && ratio < 0.3
+        if text.count >= 300 { return false }
+        var letterCount = 0
+        for c in text where c.isLetter { letterCount += 1 }
+        return Float(letterCount) / Float(text.count) < 0.3
     }
 }
 

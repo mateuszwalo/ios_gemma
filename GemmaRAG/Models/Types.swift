@@ -78,6 +78,7 @@ struct RAGResponse {
     let retrievedChunks: [RetrievedChunk]
     let associatedImages: [String]  // image filenames
     let tokensGenerated: Int
+    let promptTokens: Int
     let tokensPerSecond: Float
     let ttftMs: Float
     let totalTimeMs: Float

@@ -2,16 +2,26 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
+    @State private var selectedTab: AppTab = .chat
+
+    enum AppTab {
+        case chat
+        case eval
+    }
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Status bar
                 StatusBar(appState: appState)
 
-                // Main content
                 if appState.modelState == .loaded {
-                    ChatView()
+                    tabBar
+                    switch selectedTab {
+                    case .chat:
+                        ChatView()
+                    case .eval:
+                        EvalView()
+                    }
                 } else {
                     SetupView()
                 }
@@ -20,6 +30,32 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
     }
+
+    private var tabBar: some View {
+        HStack(spacing: 0) {
+            tabButton(tab: .chat, icon: "bubble.left.and.bubble.right", label: "Chat")
+            tabButton(tab: .eval, icon: "chart.bar.doc.horizontal", label: "Evaluation")
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 4)
+        .background(Color(.systemGray6))
+    }
+
+    private func tabButton(tab: AppTab, icon: String, label: String) -> some View {
+        Button(action: { selectedTab = tab }) {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                Text(label)
+                    .font(.subheadline)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .background(selectedTab == tab ? Color.indigo.opacity(0.15) : Color.clear)
+            .foregroundColor(selectedTab == tab ? .indigo : .secondary)
+            .cornerRadius(8)
+        }
+        .buttonStyle(.plain)
+    }
 }
 
 struct StatusBar: View {
@@ -27,7 +63,6 @@ struct StatusBar: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // Data status
             HStack(spacing: 4) {
                 Circle()
                     .fill(appState.dataLoaded ? Color.green : Color.red)
@@ -36,7 +71,6 @@ struct StatusBar: View {
                     .font(.caption)
             }
 
-            // Vector store status
             HStack(spacing: 4) {
                 Circle()
                     .fill(appState.vectorStore.isLoaded ? Color.green : Color.orange)
@@ -47,7 +81,6 @@ struct StatusBar: View {
 
             Spacer()
 
-            // Model status
             HStack(spacing: 4) {
                 Circle()
                     .fill(appState.modelState == .loaded ? Color.green : Color.red)

@@ -230,6 +230,7 @@ class RAGPipeline {
             retrievedChunks: retrievedChunks,
             associatedImages: associatedImages,
             tokensGenerated: genResult.tokensGenerated,
+            promptTokens: genResult.promptTokens,
             tokensPerSecond: genResult.tokensPerSecond,
             ttftMs: genResult.ttftMs,
             totalTimeMs: totalTimeMs,

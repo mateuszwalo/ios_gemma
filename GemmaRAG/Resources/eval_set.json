@@ -1,0 +1,182 @@
+[
+  {
+    "id": "q001",
+    "question": "In the Diamond (12 Linear Feet) contract, what are the 8.4 oz shelf discount and case cost?",
+    "expected_answer": "8.4 oz shelf discount is -$3.50 and case cost is $38.50.",
+    "relevant_chunk_ids": ["1b935a40e0ef"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q002",
+    "question": "In the Diamond contract, what is the 12 oz case cost under Shelf + Cold Cashier Discount?",
+    "expected_answer": "The 12 oz case cost under Shelf + Cold Cashier Discount is $48.95.",
+    "relevant_chunk_ids": ["1b935a40e0ef"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q003",
+    "question": "In the Platinum Groc contract, how much shelf space is defined for the program?",
+    "expected_answer": "Platinum Groc is defined as 4 Linear Feet.",
+    "relevant_chunk_ids": ["e2b870e91444"],
+    "category": "standards",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q004",
+    "question": "In Double Diamond Groc, what is the 8.4 oz case cost under Shelf + Cold Cashier Discount?",
+    "expected_answer": "The 8.4 oz case cost under Shelf + Cold Cashier Discount is $35.75.",
+    "relevant_chunk_ids": ["aba18b109de4"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q005",
+    "question": "In Triple Diamond Groc (16 Linear Feet), what is the 12 oz case cost under Shelf + Cold Cashier Discount?",
+    "expected_answer": "The 12 oz case cost under Shelf + Cold Cashier Discount is $48.20.",
+    "relevant_chunk_ids": ["ee6ff127e609"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q006",
+    "question": "In Triple Diamond Conv (7 Shelves), what is the 12 oz case cost under S.P. + P.C.C. + A.C. Discount?",
+    "expected_answer": "The 12 oz case cost under S.P. + P.C.C. + A.C. Discount is $47.95.",
+    "relevant_chunk_ids": ["a79ce7f506c2"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "medium"
+  },
+  {
+    "id": "q007",
+    "question": "What strike zone placement standard is required for Red Bull?",
+    "expected_answer": "Red Bull must be placed in the Strike Zone, 4-6 ft. from the ground.",
+    "relevant_chunk_ids": ["e2b870e91444"],
+    "category": "placement",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q008",
+    "question": "What EDLP limits are specified for 8.4oz, 12oz, and 16oz singles?",
+    "expected_answer": "EDLP limits are: 8.4oz at no more than 2/$5, 12oz at no more than 2/$6, and 16oz at no more than 2/$8.",
+    "relevant_chunk_ids": ["aba18b109de4"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q009",
+    "question": "Under Premium Cold Cashier, how close to the register line should cold Red Bull be placed?",
+    "expected_answer": "Cold Red Bull should be placed within 8 feet of the register line.",
+    "relevant_chunk_ids": ["ee6ff127e609"],
+    "category": "placement",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q010",
+    "question": "Under Premium Cold Cashier (standard shelf program), what capacity must premium cold equipment hold?",
+    "expected_answer": "Premium cold equipment must hold 3+ cases.",
+    "relevant_chunk_ids": ["aba18b109de4"],
+    "category": "execution",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q011",
+    "question": "In Triple Diamond Conv additional cooler terms, are Red Bull barrels eligible for discount?",
+    "expected_answer": "No, Red Bull barrels or other equipment are not eligible for discount.",
+    "relevant_chunk_ids": ["f384c6d6761f"],
+    "category": "execution",
+    "requires_image": false,
+    "difficulty": "medium"
+  },
+  {
+    "id": "q012",
+    "question": "In Triple Diamond Conv additional cooler terms, what are the cooler placement requirements?",
+    "expected_answer": "The additional cooler must hold 2+ cases and be placed in a high foot traffic area of the store.",
+    "relevant_chunk_ids": ["f384c6d6761f"],
+    "category": "execution",
+    "requires_image": false,
+    "difficulty": "medium"
+  },
+  {
+    "id": "q013",
+    "question": "What suggested retail prices are listed for 8.4oz, 12oz, 16oz, and 20oz singles?",
+    "expected_answer": "Suggested retail prices are: 8.4oz $2.69, 12oz $3.59, 16oz $4.39, and 20oz $5.39.",
+    "relevant_chunk_ids": ["1b935a40e0ef"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q014",
+    "question": "In Platinum Liquor, what are the 8.4 oz shelf discount and case cost?",
+    "expected_answer": "In Platinum Liquor, the 8.4 oz shelf discount is -$4.75 and case cost is $37.25.",
+    "relevant_chunk_ids": ["049f372a13a7"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "medium"
+  },
+  {
+    "id": "q015",
+    "question": "What are the 16 oz EDLP case discount and case cost in the contract details?",
+    "expected_answer": "The 16 oz EDLP case discount is -$2.00 and case cost is $33.11.",
+    "relevant_chunk_ids": ["ad30bffb886f"],
+    "category": "pricing",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q016",
+    "question": "Until what date does the agreement continue unless terminated earlier?",
+    "expected_answer": "The agreement continues until December 31, 2025, unless terminated earlier.",
+    "relevant_chunk_ids": ["ad30bffb886f"],
+    "category": "legal",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q017",
+    "question": "How much prior written notice is required to change participation level?",
+    "expected_answer": "Changing participation level requires no less than 30 days' prior written notice.",
+    "relevant_chunk_ids": ["ad30bffb886f"],
+    "category": "legal",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q018",
+    "question": "What is the cure period for a material breach after written notice of default?",
+    "expected_answer": "The cure period is within three (3) days after receipt of written notice of default.",
+    "relevant_chunk_ids": ["ad30bffb886f"],
+    "category": "legal",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q019",
+    "question": "Is Red Bull North America, Inc. a party to this agreement?",
+    "expected_answer": "No. The agreement states that Red Bull North America, Inc. is not a party to this agreement.",
+    "relevant_chunk_ids": ["b59c318c253b"],
+    "category": "legal",
+    "requires_image": false,
+    "difficulty": "easy"
+  },
+  {
+    "id": "q020",
+    "question": "What minimum and maximum purchase case count is required in the EDLP details section?",
+    "expected_answer": "The account agrees to buy a minimum of 15 cases and no more than 30 cases.",
+    "relevant_chunk_ids": ["b59c318c253b"],
+    "category": "execution",
+    "requires_image": false,
+    "difficulty": "medium"
+  }
+]

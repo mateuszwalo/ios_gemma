@@ -123,7 +123,7 @@ class RAGPipeline {
         var selectedSourceFiles: Set<String> = []
 
         for (rank, item) in selectedItems.enumerated() {
-            if item.chunk.text.count < 200 { continue }
+            if Self.isGarbageChunk(item.chunk.text) { continue }
 
             var chunkText = item.chunk.text
             var sourceInfo = "[Source: \(item.chunk.sourceFile)"
@@ -265,6 +265,13 @@ class RAGPipeline {
 
             candidates.append((path: img.path, score: score, ocrMatch: ocrMatch))
         }
+    }
+
+    static func isGarbageChunk(_ text: String) -> Bool {
+        if text.count < 150 { return true }
+        let letters = text.unicodeScalars.filter { CharacterSet.letters.contains($0) }.count
+        let ratio = Float(letters) / max(Float(text.count), 1)
+        return text.count < 300 && ratio < 0.3
     }
 }
 

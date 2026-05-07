@@ -101,18 +101,34 @@ class LlamaRunner: ObservableObject {
         self.loadProgress = "Model loaded"
     }
 
-    func generate(prompt: String) async throws -> GenerationOutput {
+    func generate(prompt: String, temperatureOverride: Float? = nil) async throws -> GenerationOutput {
         guard let model = model,
               let context = context,
               let vocab = vocab,
-              let sampler = sampler,
+              var activeSampler = sampler,
               let batch = batch else {
             throw LlamaError.notLoaded
         }
 
-        let maxGenTokens = config.maxTokens
+        var retrySampler: UnsafeMutablePointer<llama_sampler>?
+        if let overrideTemp = temperatureOverride, overrideTemp != config.temperature {
+            let chainParams = llama_sampler_chain_default_params()
+            if let chain = llama_sampler_chain_init(chainParams) {
+                llama_sampler_chain_add(chain, llama_sampler_init_temp(overrideTemp))
+                llama_sampler_chain_add(chain, llama_sampler_init_top_p(config.topP, 1))
+                llama_sampler_chain_add(chain, llama_sampler_init_top_k(Int32(config.topKSampling)))
+                llama_sampler_chain_add(chain, llama_sampler_init_dist(UInt32.max))
+                retrySampler = chain
+                activeSampler = chain
+            }
+        }
 
-        return try await Task.detached(priority: .userInitiated) {
+        let maxGenTokens = config.maxTokens
+        let useSampler = activeSampler
+
+        return try await Task.detached(priority: .userInitiated) { [retrySampler] in
+            defer { if let rs = retrySampler { llama_sampler_free(rs) } }
+
             var batch = batch
             let startTime = CFAbsoluteTimeGetCurrent()
             var firstTokenTime: CFAbsoluteTime?
@@ -150,7 +166,7 @@ class LlamaRunner: ObservableObject {
             var nCur = nPromptTokens
 
             for _ in 0..<maxGenTokens {
-                let newToken = llama_sampler_sample(sampler, context, -1)
+                let newToken = llama_sampler_sample(useSampler, context, -1)
 
                 if llama_vocab_is_eog(vocab, newToken) {
                     break
@@ -199,7 +215,7 @@ class LlamaRunner: ObservableObject {
             let genTime = firstTokenTime.map { endTime - $0 } ?? (endTime - startTime)
             let tps = genTime > 0 ? Float(outputTokens.count) / Float(genTime) : 0
 
-            llama_sampler_reset(sampler)
+            llama_sampler_reset(useSampler)
 
             return GenerationOutput(
                 text: generatedText.trimmingCharacters(in: .whitespacesAndNewlines),

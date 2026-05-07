@@ -15,6 +15,7 @@
     "n_ctx": 4096,
     "n_threads": 4,
     "temperature": 0.3,
+    "retry_temperature": 0.6,
     "top_p": 0.90,
     "top_k": 40,
     "max_tokens": 512,

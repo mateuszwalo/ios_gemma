@@ -105,17 +105,44 @@ struct EvidenceImageView: View {
     let imagePath: String
     let resolveURL: (String) -> URL?
 
+    @State private var showFullscreen = false
+
+    private var filename: String {
+        (imagePath as NSString).lastPathComponent
+    }
+
     var body: some View {
         if let url = resolveURL(imagePath), let uiImage = UIImage(contentsOfFile: url.path) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFit()
-                .frame(maxHeight: 300)
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-                )
+            VStack(alignment: .leading, spacing: 4) {
+                Button(action: { showFullscreen = true }) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 300)
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
+                        )
+                        .overlay(alignment: .topTrailing) {
+                            Image(systemName: "arrow.up.left.and.arrow.down.right")
+                                .font(.caption)
+                                .padding(6)
+                                .background(.ultraThinMaterial)
+                                .cornerRadius(6)
+                                .padding(6)
+                        }
+                }
+                .buttonStyle(.plain)
+
+                Text(filename)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            }
+            .fullScreenCover(isPresented: $showFullscreen) {
+                FullscreenImageView(image: uiImage, filename: filename)
+            }
         } else {
             HStack {
                 Image(systemName: "photo.badge.exclamationmark")
@@ -126,6 +153,93 @@ struct EvidenceImageView: View {
             .padding(6)
             .background(Color(.systemGray6))
             .cornerRadius(6)
+        }
+    }
+}
+
+struct FullscreenImageView: View {
+    let image: UIImage
+    let filename: String
+
+    @Environment(\.dismiss) private var dismiss
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+    @State private var offset: CGSize = .zero
+    @State private var lastOffset: CGSize = .zero
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(filename)
+                            .font(.caption.bold())
+                            .foregroundColor(.white)
+                        Text("Pinch to zoom \u{00B7} Double-tap to reset")
+                            .font(.caption2)
+                            .foregroundColor(.white.opacity(0.6))
+                    }
+
+                    Spacer()
+
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                }
+                .padding()
+                .background(Color.black.opacity(0.5))
+
+                GeometryReader { geo in
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .scaleEffect(scale)
+                        .offset(offset)
+                        .gesture(
+                            MagnificationGesture()
+                                .onChanged { value in
+                                    scale = lastScale * value
+                                }
+                                .onEnded { value in
+                                    lastScale = scale
+                                    if scale < 1.0 {
+                                        withAnimation { scale = 1.0 }
+                                        lastScale = 1.0
+                                    }
+                                }
+                        )
+                        .simultaneousGesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    offset = CGSize(
+                                        width: lastOffset.width + value.translation.width,
+                                        height: lastOffset.height + value.translation.height
+                                    )
+                                }
+                                .onEnded { _ in
+                                    lastOffset = offset
+                                }
+                        )
+                        .onTapGesture(count: 2) {
+                            withAnimation {
+                                if scale > 1.5 {
+                                    scale = 1.0
+                                    lastScale = 1.0
+                                    offset = .zero
+                                    lastOffset = .zero
+                                } else {
+                                    scale = 3.0
+                                    lastScale = 3.0
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
         }
     }
 }

@@ -144,5 +144,7 @@ struct RAGConfig {
     var maxTokens: Int = 512
     var nGpuLayers: Int = 99  // Use Metal on iPad (unlike Python CPU-only simulation)
 
-    var promptTemplate: String = "<start_of_turn>user\nYou are a field assistant answering questions about Red Bull VIP Opt-In contracts and product standards. Answer ONLY from the context below. Include exact dollar amounts, percentages, and specific numbers when available. Be concise and precise. Always respond in English.\n\nCONTEXT:\n{context}\n\nQUESTION: {question}<end_of_turn>\n<start_of_turn>model\n"
+    var retryTemperature: Float = 0.6
+
+    var promptTemplate: String = "<start_of_turn>user\nYou are a contract data extraction assistant for Red Bull VIP Opt-In agreements. Your job is to find and quote exact data from the context below.\n\nRULES:\n1. The answer IS in the context. Read every source carefully before answering.\n2. Quote exact dollar amounts, percentages, case counts, and dates exactly as written.\n3. When multiple tiers or programs appear, match the EXACT tier name from the question — do not use numbers from a different tier.\n4. Never invent or estimate numbers. Only state values explicitly written in the context.\n5. Always answer directly. Do not say \"the context does not state\" unless the data is truly absent from ALL sources.\n\nCONTEXT:\n{context}\n\nQUESTION: {question}<end_of_turn>\n<start_of_turn>model\n"
 }

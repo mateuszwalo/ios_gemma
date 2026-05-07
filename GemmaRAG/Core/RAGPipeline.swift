@@ -1,15 +1,5 @@
 import Foundation
 
-/// End-to-end RAG pipeline for iOS.
-/// Mirrors Python's RAGPipeline: query -> embed -> retrieve -> build prompt -> generate.
-///
-/// Retrieval strategy:
-/// 1. Keyword search to find candidate chunks (BM25-like lexical matching)
-/// 2. Build pseudo query embedding from keyword-matched chunks' pre-computed embeddings
-/// 3. Dense vector search using pseudo embedding
-/// 4. Hybrid re-ranking: alpha * dense_score + (1-alpha) * lexical_score + source_boost
-/// 5. Build prompt with top-k context chunks
-/// 6. Generate answer with llama.cpp (Gemma GGUF)
 class RAGPipeline {
     let chunkStore: ChunkStore
     let vectorStore: VectorStore
@@ -28,7 +18,6 @@ class RAGPipeline {
         self.config = config
     }
 
-    /// Execute a full RAG query. Call from main actor context.
     @MainActor
     func query(question: String, includeImages: Bool = false) async throws -> RAGResponse {
         let overallStart = CFAbsoluteTimeGetCurrent()
@@ -51,7 +40,6 @@ class RAGPipeline {
         var retrievalPool: [RetrievalCandidate] = []
 
         if vectorStore.isLoaded && !keywordResults.isEmpty {
-            // Create pseudo embedding from keyword-matched chunks
             let matchedIds = keywordResults.map { $0.chunkId }
             let weights = keywordResults.map { $0.lexicalScore + $0.sourceScore }
             let queryEmbedding = vectorStore.pseudoQueryEmbedding(
@@ -59,13 +47,11 @@ class RAGPipeline {
                 weights: weights
             )
 
-            // Dense search
             let denseResults = vectorStore.search(
                 queryEmbedding: queryEmbedding,
                 topK: config.searchPoolK
             )
 
-            // Build retrieval pool with hybrid scores
             for denseResult in denseResults {
                 guard let chunk = chunkStore.chunk(for: denseResult.chunkId) else { continue }
                 let lexical = KeywordSearch.lexicalScore(query: factualQuestion, chunkText: chunk.text)
@@ -88,7 +74,6 @@ class RAGPipeline {
             }
         }
 
-        // If no dense results, fall back to pure keyword results
         if retrievalPool.isEmpty {
             for kw in keywordResults {
                 guard let chunk = chunkStore.chunk(for: kw.chunkId) else { continue }
@@ -103,7 +88,7 @@ class RAGPipeline {
             }
         }
 
-        // Source-focused filtering (matching Python logic)
+        // Source-focused filtering
         var effectivePool = retrievalPool
         if !retrievalPool.isEmpty {
             let maxSourceScore = retrievalPool.map(\.sourceScore).max() ?? 0
@@ -115,11 +100,9 @@ class RAGPipeline {
             }
         }
 
-        // Sort and select top-k
         effectivePool.sort { $0.hybridScore > $1.hybridScore }
         let selectedItems = Array(effectivePool.prefix(config.topK))
 
-        // Compute confidence
         let srcConsistency = KeywordSearch.sourceConsistency(
             sourceFiles: selectedItems.map { $0.chunk.sourceFile }
         )
@@ -137,10 +120,10 @@ class RAGPipeline {
         var imageCandidates: [(path: String, score: Float, ocrMatch: Float)] = []
         var currentContextChars = 0
         let separator = "\n\n---\n\n"
+        var selectedSourceFiles: Set<String> = []
 
         for (rank, item) in selectedItems.enumerated() {
             var chunkText = item.chunk.text
-            // Add source metadata
             var sourceInfo = "[Source: \(item.chunk.sourceFile)"
             if let page = item.chunk.pageNumber {
                 sourceInfo += ", page \(page + 1)"
@@ -148,7 +131,6 @@ class RAGPipeline {
             sourceInfo += "]"
             chunkText = "\(sourceInfo)\n\(chunkText)"
 
-            // Respect context char limit
             let extra = chunkText.count + (contextParts.isEmpty ? 0 : separator.count)
             let remaining = config.maxContextChars - currentContextChars
             if remaining <= 0 { break }
@@ -162,6 +144,7 @@ class RAGPipeline {
 
             contextParts.append(chunkText)
             currentContextChars += chunkText.count + (contextParts.count > 1 ? separator.count : 0)
+            selectedSourceFiles.insert(item.chunk.sourceFile)
 
             retrievedChunks.append(RetrievedChunk(
                 chunk: item.chunk,
@@ -172,35 +155,40 @@ class RAGPipeline {
                 rank: rank
             ))
 
-            // Collect image candidates
             if allowImages {
-                let topSourceFile = selectedItems.first?.chunk.sourceFile ?? ""
-                let sameSource = item.chunk.sourceFile == topSourceFile
-                for img in item.chunk.associatedImages {
-                    let ocrMatch: Float
-                    if let ocr = img.ocrSnippet, !ocr.isEmpty {
-                        ocrMatch = KeywordSearch.lexicalScore(query: factualQuestion, chunkText: ocr)
-                    } else {
-                        ocrMatch = 0
-                    }
+                collectImageCandidates(
+                    from: item.chunk,
+                    rank: rank,
+                    sameSource: item.chunk.sourceFile == selectedItems.first?.chunk.sourceFile,
+                    denseScore: item.denseScore,
+                    factualQuestion: factualQuestion,
+                    into: &imageCandidates
+                )
+            }
+        }
 
-                    let rankBonus = Float(1.0 / (1.0 + Float(rank))) * 40_000.0
-                    let sourceBonus: Float = sameSource ? 60_000.0 : 0
-                    let denseBonus = item.denseScore * 30_000.0
-                    let ocrBonus = ocrMatch * 50_000.0
-                    let hasOcrPenalty: Float = (img.ocrSnippet?.isEmpty ?? true) ? -30_000.0 : 0
-                    let densityBonus = Float(img.textDensity ?? 0) * 20_000.0
-
-                    let score = rankBonus + sourceBonus + denseBonus + ocrBonus + hasOcrPenalty + densityBonus
-
-                    imageCandidates.append((path: img.path, score: score, ocrMatch: ocrMatch))
-                }
+        // Source-based image fallback: if top chunks had no images,
+        // find sibling chunks from the same source that DO have images
+        if allowImages && imageCandidates.isEmpty && !selectedSourceFiles.isEmpty {
+            let topSource = selectedItems.first?.chunk.sourceFile ?? ""
+            for chunkId in chunkStore.orderedChunkIds {
+                guard let chunk = chunkStore.chunk(for: chunkId),
+                      chunk.sourceFile == topSource,
+                      !chunk.associatedImages.isEmpty else { continue }
+                collectImageCandidates(
+                    from: chunk,
+                    rank: selectedItems.count,
+                    sameSource: true,
+                    denseScore: 0.5,
+                    factualQuestion: factualQuestion,
+                    into: &imageCandidates
+                )
+                if imageCandidates.count >= config.maxImages { break }
             }
         }
 
         // Select best evidence images
         if allowImages && !imageCandidates.isEmpty && confidence >= config.imageMinConfidence {
-            // Deduplicate by path (keep highest score)
             var dedup: [String: (path: String, score: Float, ocrMatch: Float)] = [:]
             for img in imageCandidates {
                 if dedup[img.path] == nil || img.score > dedup[img.path]!.score {
@@ -219,8 +207,16 @@ class RAGPipeline {
             .replacingOccurrences(of: "{context}", with: context)
             .replacingOccurrences(of: "{question}", with: factualQuestion)
 
-        // 5. Generate
-        let genResult = try await llamaRunner.generate(prompt: prompt)
+        // 5. Generate (with retry on empty)
+        var genResult = try await llamaRunner.generate(prompt: prompt)
+
+        if genResult.tokensGenerated == 0 {
+            let retryPrompt = prompt + "Answer: "
+            genResult = try await llamaRunner.generate(
+                prompt: retryPrompt,
+                temperatureOverride: config.retryTemperature
+            )
+        }
 
         let totalTimeMs = Float((CFAbsoluteTimeGetCurrent() - overallStart) * 1000)
 
@@ -239,9 +235,36 @@ class RAGPipeline {
             retrievalConfidence: confidence
         )
     }
-}
 
-// MARK: - Internal types
+    private func collectImageCandidates(
+        from chunk: ChunkData,
+        rank: Int,
+        sameSource: Bool,
+        denseScore: Float,
+        factualQuestion: String,
+        into candidates: inout [(path: String, score: Float, ocrMatch: Float)]
+    ) {
+        for img in chunk.associatedImages {
+            let ocrMatch: Float
+            if let ocr = img.ocrSnippet, !ocr.isEmpty {
+                ocrMatch = KeywordSearch.lexicalScore(query: factualQuestion, chunkText: ocr)
+            } else {
+                ocrMatch = 0
+            }
+
+            let rankBonus = Float(1.0 / (1.0 + Float(rank))) * 40_000.0
+            let sourceBonus: Float = sameSource ? 60_000.0 : 0
+            let denseBonus = denseScore * 30_000.0
+            let ocrBonus = ocrMatch * 50_000.0
+            let hasOcrPenalty: Float = (img.ocrSnippet?.isEmpty ?? true) ? -30_000.0 : 0
+            let densityBonus = Float(img.textDensity ?? 0) * 20_000.0
+
+            let score = rankBonus + sourceBonus + denseBonus + ocrBonus + hasOcrPenalty + densityBonus
+
+            candidates.append((path: img.path, score: score, ocrMatch: ocrMatch))
+        }
+    }
+}
 
 private struct RetrievalCandidate {
     let chunkId: String

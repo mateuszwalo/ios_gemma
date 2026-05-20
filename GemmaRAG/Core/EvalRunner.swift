@@ -426,19 +426,27 @@ class EvalRunner: ObservableObject {
         return Float(ProcessInfo.processInfo.physicalMemory) / (1024 * 1024)
     }
 
+    @Published var statusMessage: String = ""
+
     private func saveReport(_ report: EvalReport, reportId: String) -> String {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
 
-        let docsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        guard let docsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            self.statusMessage = "Failed to save report: could not resolve documents directory"
+            return "error: could not resolve documents directory"
+        }
         let evalDir = docsDir.appendingPathComponent("eval_reports")
-        try? FileManager.default.createDirectory(at: evalDir, withIntermediateDirectories: true)
-
         let filename = "eval_\(reportId).json"
         let fileURL = evalDir.appendingPathComponent(filename)
 
-        if let data = try? encoder.encode(report) {
-            try? data.write(to: fileURL)
+        do {
+            try FileManager.default.createDirectory(at: evalDir, withIntermediateDirectories: true)
+            let data = try encoder.encode(report)
+            try data.write(to: fileURL)
+            self.statusMessage = "Report saved: \(fileURL.lastPathComponent)"
+        } catch {
+            self.statusMessage = "Failed to save report: \(error.localizedDescription)"
         }
 
         return fileURL.path

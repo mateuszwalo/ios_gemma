@@ -66,7 +66,7 @@ struct MessageView: View {
                     MetricsView(metrics: metrics)
                 }
             }
-            .frame(maxWidth: UIScreen.main.bounds.width * 0.85, alignment: message.role == .user ? .trailing : .leading)
+            .frame(maxWidth: 600, alignment: message.role == .user ? .trailing : .leading)
 
             if message.role == .user { roleIcon }
             if message.role == .assistant || message.role == .system { Spacer() }

@@ -3,11 +3,24 @@ import SwiftUI
 @main
 struct GemmaRAGApp: App {
     @StateObject private var appState = AppState()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(appState)
+                .onChange(of: scenePhase) { _, newPhase in
+                    switch newPhase {
+                    case .active:
+                        print("[Lifecycle] App became active")
+                    case .inactive:
+                        print("[Lifecycle] App became inactive")
+                    case .background:
+                        print("[Lifecycle] App moved to background")
+                    @unknown default:
+                        print("[Lifecycle] Unknown scene phase")
+                    }
+                }
         }
     }
 }
@@ -26,6 +39,8 @@ class AppState: ObservableObject {
     var pipeline: RAGPipeline?
 
     init() {
+        loadConfig()
+        setupMemoryWarningObserver()
         loadBundledData()
         Task { await autoLoadModel() }
     }
@@ -50,7 +65,7 @@ class AppState: ObservableObject {
     }
 
     func autoLoadModel() async {
-        let docsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        guard let docsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let fm = FileManager.default
         guard let files = try? fm.contentsOfDirectory(at: docsDir, includingPropertiesForKeys: [.fileSizeKey]) else { return }
 
@@ -186,6 +201,49 @@ class AppState: ObservableObject {
         }
 
         return result
+    }
+
+    private func loadConfig() {
+        if let configURL = Bundle.main.url(forResource: "config", withExtension: "json"),
+           let configData = try? Data(contentsOf: configURL),
+           let json = try? JSONSerialization.jsonObject(with: configData) as? [String: Any] {
+            if let rag = json["rag"] as? [String: Any] {
+                if let v = rag["top_k"] as? Int { config.topK = v }
+                if let v = rag["search_pool_k"] as? Int { config.searchPoolK = v }
+                if let v = rag["rerank_alpha"] as? Double { config.rerankAlpha = Float(v) }
+                if let v = rag["source_boost"] as? Double { config.sourceBoost = Float(v) }
+                if let v = rag["max_context_chars"] as? Int { config.maxContextChars = v }
+                if let v = rag["max_context_chunks"] as? Int { config.maxContextChunks = v }
+                if let v = rag["max_images"] as? Int { config.maxImages = v }
+                if let v = rag["min_retrieval_confidence"] as? Double { config.minRetrievalConfidence = Float(v) }
+                if let v = rag["image_min_confidence"] as? Double { config.imageMinConfidence = Float(v) }
+                if let v = rag["min_image_ocr_match"] as? Double { config.minImageOcrMatch = Float(v) }
+            }
+            if let llm = json["llm"] as? [String: Any] {
+                if let v = llm["n_ctx"] as? Int { config.nCtx = v }
+                if let v = llm["n_threads"] as? Int { config.nThreads = v }
+                if let v = llm["temperature"] as? Double { config.temperature = Float(v) }
+                if let v = llm["retry_temperature"] as? Double { config.retryTemperature = Float(v) }
+                if let v = llm["top_p"] as? Double { config.topP = Float(v) }
+                if let v = llm["top_k"] as? Int { config.topKSampling = v }
+                if let v = llm["max_tokens"] as? Int { config.maxTokens = v }
+                if let v = llm["n_gpu_layers"] as? Int { config.nGpuLayers = v }
+            }
+        }
+    }
+
+    private func setupMemoryWarningObserver() {
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.didReceiveMemoryWarningNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleMemoryWarning()
+        }
+    }
+
+    private func handleMemoryWarning() {
+        addSystemMessage("Low memory warning — consider restarting if app becomes slow.")
     }
 
     private func addSystemMessage(_ text: String) {
